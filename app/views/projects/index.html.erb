@@ -1,8 +1,56 @@
-<h1>トップページ</h1>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-2" style="background-color:red;">Red</div>
-    <div class="col-sm-8 d-sm-none" style="background-color:blue;">Blue</div>
-    <div class="col-sm-2" style="background-color:yellow;">Yellow</div>
+<%# <h1>トップページ</h1> %>
+<%# <%= render "side_bar"%>
+<div class="container-fliid d-flex">
+  <div class="col-3 p-0 vh-100">
+    <div class="px-1 border-bottom border-right h90px d-flex justify-content-between">
+      <a href="#" class="text-reset align-self-center">
+      ユーザーネーム</a>
+      <a href="#" class="text-reset align-self-center">
+      newプロジェクト</a>
+    </div>
+    <div class="overflow-auto h_calc100vh-90px border-right">
+      <% 20.times do |i| %>
+      <div class="d-flex justify-content-between py-2">
+        <a href="#" class="text-reset align-text-center py-1 my-auto mx-1">
+        <%= "プロジェクト#{i+1}"%></a>
+        <div class="d-flex align-items-center">
+          <a href="#" class="f-size12 text-reset py-1 mx-1">
+          編集</a>
+          <%=link_to "削除","#", :class => "f-size12 text-reset py-1 mx-1" %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-9 p-0">
+    <div class="h90px d-flex flex-column justify-content-between border-bottom">
+      <div class="d-flex align-items-center">
+        <h2 class="mr-2">プロジェクト名</h2>
+        <a href="#" class="text-reset align-text-center">新しいメンバーを招待する</a>
+      </div>
+      <div class="d-flex">
+        <div>参加メンバー30人</div>
+        <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
+          <% 30.times do |i|%>
+            <li class="py-1 mx-1 f-size12 ">
+            <%="メンバー#{i+1}"%></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="overflow-auto h_calc100vh-90px">
+      <% 20.times do |i| %>
+        <div class="d-flex justify-content-between border py-1 m-2">
+            <a href="#" class="text-reset py-2 my-auto mx-1">
+            <%= "作業#{i+1}"%></a>
+            <%# <p class="my-auto">最終コメント</p> %>
+          <div class="d-flex align-items-center px-2">
+            <a href="#" class="f-size12 text-reset p-1 mx-1">
+            編集</a>
+            <%=link_to "削除","#", :class => "f-size12 text-reset p-1 mx-1" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
