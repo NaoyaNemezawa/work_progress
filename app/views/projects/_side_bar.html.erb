@@ -1,7 +1,11 @@
 <div class="col-3 p-0 vh-100">
   <div class="px-1 border-bottom border-right h90px d-flex justify-content-between">
-    <a href="#" class="text-reset align-self-center">ユーザーネーム</a>
-    <%= link_to "新規登録", new_user_registration_path, :class =>"text-reset align-self-center" %>
+    <%if user_signed_in?%>
+      <a href="#" class="text-reset align-self-center"><%=current_user.name%></a>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete ,:class =>"text-reset align-self-center" %>
+    <% else %>
+      <%= link_to "新規登録", new_user_registration_path, :class =>"text-reset align-self-center" %>
+    <% end %>
     <a href="#" class="text-reset align-self-center">newプロジェクト</a>
   </div>
   <div class="overflow-auto h_calc100vh-90px border-right">
