@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :signed_in?
   def index
-    
   end
 
   def new
@@ -9,10 +8,12 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    binding.pry
-    # @project = Project.new(project_params)
-    # @project.save
-    redirect_to root_path
+    @project = Project.new(project_params)
+    if @project.save
+      redirect_to root_path
+    else
+      render "new"
+    end
   end
 
   private
