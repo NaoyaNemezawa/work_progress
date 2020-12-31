@@ -1,0 +1,6 @@
+<h2>新規プロジェクト作成</h2>
+<%= form_with model: @project, local: true do |f| %>
+  <%= f.text_field :name %>
+  <input name="project[user_ids][]" type="hidden" value=<%= current_user.id%>>
+  <%= f.submit %>
+<% end %>
