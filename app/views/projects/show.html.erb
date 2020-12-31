@@ -9,12 +9,10 @@
         <a href="#" class="text-reset align-text-center">新しいメンバーを招待する</a>
       </div>
       <div class="d-flex">
-        <div>参加メンバー30人</div>
+        <div><%= "参加メンバー#{@project.users.count}人" %></div>
         <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
-          <% 30.times do |i|%>
             <li class="py-1 mx-1 f-size12 ">
-            <%="メンバー#{i+1}"%></li>
-          <% end %>
+            <%= @project.users.map(&:name).join("") %></li>
         </ul>
       </div>
     </div>
