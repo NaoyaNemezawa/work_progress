@@ -1,0 +1,6 @@
+<h2><%= "#{@project.name}にメンバーを追加する。" %></h2>
+<%= form_with model: @user_project, url:project_user_projects_path(@project.id), local: true do |f| %>
+  <%= f.text_field :name %>
+  <%# <input name="user_project[project_id][]" type="hidden" value=<%= @project.id%>
+  <%= f.submit %>
+<% end %>

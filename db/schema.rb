@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_12_31_085545) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_user_projects_on_project_id"
+    t.index ["user_id", "project_id"], name: "index_user_projects_on_user_id_and_project_id", unique: true
     t.index ["user_id"], name: "index_user_projects_on_user_id"
   end
 
