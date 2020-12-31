@@ -7,8 +7,7 @@
   <div class="overflow-auto h_calc100vh-90px border-right">
     <% current_user.projects.each do |project| %>
     <div class="d-flex justify-content-between py-2">
-      <a href="#" class="text-reset align-text-center py-1 my-auto mx-1">
-      <%= project.name %></a>
+      <%= link_to project.name, project_path(project.id), :class=>"text-reset align-text-center py-1 my-auto mx-1" %>
       <div class="d-flex align-items-center">
         <a href="#" class="f-size12 text-reset py-1 mx-1">編集</a>
         <%=link_to "削除","#", :class => "f-size12 text-reset py-1 mx-1" %>
