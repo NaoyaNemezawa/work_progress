@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    # binding.pry
     @project = Project.find(params[:id])
   end
 
