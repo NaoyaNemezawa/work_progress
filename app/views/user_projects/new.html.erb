@@ -1,6 +1,9 @@
 <h2><%= "#{@project.name}にメンバーを追加する。" %></h2>
 <%= form_with model: @user_project, url:project_user_projects_path(@project.id), local: true do |f| %>
-  <%= f.text_field :name %>
+  <div class="field" >
+    <%= f.label :追加したいメンバーのメールアドレスを入力してください %><br />
+    <%= f.text_field :email %>
+  </div>
   <%= f.submit %>
 <% end %>
 <%= link_to "戻る",project_path(@project.id) %>

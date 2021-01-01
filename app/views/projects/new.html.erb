@@ -5,8 +5,8 @@
     <%= f.text_field :name %>
   </div>
     <div class="field">
-    <%= f.label :プロジェクトメンバーを入力してください %><br />
-    <%= f.text_field :member_name %>
+    <%= f.label :メンバーのメールアドレスを入力してください %><br />
+    <%= f.text_field :member_email %>
   </div>
   <input name="project[user_ids][]" type="hidden" value=<%= current_user.id%>>
   <%= f.submit %>

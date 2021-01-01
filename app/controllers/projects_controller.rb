@@ -8,8 +8,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    if params[:project][:member_name]
-      member = User.find_by(name: params[:project][:member_name])
+    if params[:project][:member_email]
+      member = User.find_by(email: params[:project][:member_email])
       params[:project][:user_ids] << member.id
     end
     @project = Project.new(project_params)
