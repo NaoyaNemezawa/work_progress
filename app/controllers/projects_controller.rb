@@ -8,6 +8,10 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    if params[:project][:member_name]
+      member = User.find_by(name: params[:project][:member_name])
+      params[:project][:user_ids] << member.id
+    end
     @project = Project.new(project_params)
     if @project.save
       redirect_to root_path
