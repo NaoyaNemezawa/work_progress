@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
         unless member.nil?
           params[:project][:user_ids] << member.id
         else
-          flash[:error]<<"#{email}は存在しません"
+          flash[:error] << "#{email}は存在しません"
         end
       end
     end

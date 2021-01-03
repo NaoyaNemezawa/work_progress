@@ -1,6 +1,5 @@
-let count_form = 0
-
 function form () {
+  let count_form = 0
   const addbtn = document.getElementById("add_btn");
   const closebtn = document.getElementById("close_btn")
   

@@ -2,7 +2,7 @@
   <div class="px-1 border-bottom border-right h90px d-flex justify-content-between">
     <a href="#" class="text-reset align-self-center"><%=current_user.name%></a>
     <%= link_to "ログアウト", destroy_user_session_path, method: :delete ,:class =>"text-reset align-self-center" %>
-    <%= link_to "newプロジェクト", new_project_path, :class => "text-reset align-self-center" %>
+    <%= link_to "newプロジェクト", new_project_path, :class => "text-reset align-self-center", data: {"turbolinks" => false} %>
   </div>
   <div class="overflow-auto h_calc100vh-90px border-right">
     <% current_user.projects.each do |project| %>
