@@ -5,18 +5,26 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @member_email = nil
   end
 
   def create
-    if params[:project][:member_email]
-      member = User.find_by(email: params[:project][:member_email])
-      params[:project][:user_ids] << member.id
+    flash[:error] = []
+    params[:project][:emails].each do |email|
+      unless email.empty?
+        member = User.find_by(email: email)
+        unless member.nil?
+          params[:project][:user_ids] << member.id
+        else
+          flash[:error]<<"#{email}は存在しません"
+        end
+      end
     end
     @project = Project.new(project_params)
-    if @project.save
+    if flash[:error].empty? && @project.save
       redirect_to root_path
     else
-      render "new"
+      render :new
     end
   end
 
