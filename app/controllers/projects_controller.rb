@@ -10,14 +10,13 @@ class ProjectsController < ApplicationController
 
   def create
     flash[:error] = []
+    params[:project][:emails].reject!(&:empty?)
     params[:project][:emails].each do |email|
-      unless email.empty?
-        member = User.find_by(email: email)
-        unless member.nil?
-          params[:project][:user_ids] << member.id
-        else
-          flash[:error] << "#{email}は存在しません"
-        end
+      member = User.find_by(email: email)
+      unless member.nil?
+        params[:project][:user_ids] << member.id
+      else
+        flash[:error] << "#{email}は存在しません"
       end
     end
     @project = Project.new(project_params)
