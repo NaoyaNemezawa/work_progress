@@ -21,3 +21,10 @@ li{
 .white-space{
   white-space: nowrap;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.width-150{
+  width: 150px;
+}
