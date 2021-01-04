@@ -6,7 +6,8 @@
     <div class="h90px d-flex flex-column justify-content-between border-bottom">
       <div class="d-flex align-items-center">
         <h2 class="mr-2"><%= @project.name %></h2>
-        <%= link_to "新しいメンバーを招待する", new_project_user_project_path(@project.id), :class=> "text-reset align-text-center" %>
+        <%= link_to "メンバー追加", new_project_user_project_path(@project.id), :class=> "text-reset align-text-center" %>
+        <%= link_to "タスク追加",  new_project_task_path(@project.id), :class=> "ml-2 text-reset align-text-center" %>
       </div>
       <div class="d-flex">
         <div><%= "参加メンバー#{@project.users.count}人" %></div>
