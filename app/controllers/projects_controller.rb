@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :signed_in?
+  # before_action :signed_in?
   before_action :project_find, only:[:show, :destroy]
   def index
   end
@@ -37,11 +37,12 @@ class ProjectsController < ApplicationController
 
   private
 
-  def signed_in?
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
-  end
+  # いらないことに気づいた。後で削除
+  # def signed_in?
+  #   unless user_signed_in?
+  #     redirect_to new_user_session_path
+  #   end
+  # end
 
   def project_find
     @project = Project.find(params[:id])
