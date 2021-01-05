@@ -13,6 +13,10 @@ class TasksController < ApplicationController
     end
   end
 
+  def show
+    
+  end
+
   private
   def task_params
     params.require(:task).permit(:name,:specifilcs).merge(project_id: params[:project_id])

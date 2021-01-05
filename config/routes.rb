@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   root to: "projects#index"
   resources :projects, only:[:index,:new,:create,:show, :destroy] do
     resources :user_projects, only:[:new,:create]
-    resources :tasks, only:[:new,:create]
+    resources :tasks, only:[:new,:create,:show]
   end
 end
