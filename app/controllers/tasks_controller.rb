@@ -14,12 +14,12 @@ class TasksController < ApplicationController
   end
 
   def show
-    
+    @task = Task.find(params[:id])
   end
 
   private
   def task_params
-    params.require(:task).permit(:name,:specifilcs).merge(project_id: params[:project_id])
+    params.require(:task).permit(:name,:specifics).merge(project_id: params[:project_id])
   end
 
   def project_find
