@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'comments/index'
   get 'tasks/new'
   devise_for :users
   root to: "projects#index"
-  resources :projects, only:[:index,:new,:create,:show,:destroy] do
+  resources :projects, only:[:index,:new,:create,:destroy] do
     resources :user_projects, only:[:new,:create]
-    resources :tasks, expect:[:index]
+    resources :tasks, except:[:show] do
+      resources :comments, only:[:index,:create]
+    end
   end
 end

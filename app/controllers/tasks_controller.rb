@@ -1,6 +1,11 @@
 class TasksController < ApplicationController
-  before_action :project_find, expect:[:destroy]
+  before_action :project_find, except:[:destroy]
   before_action :task_find, only:[:show,:edit,:update,:destroy] 
+
+  def index
+    @tasks = @project.tasks
+  end
+  
   def new
     @task = Task.new
   end
@@ -12,9 +17,6 @@ class TasksController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
   end
 
   def edit

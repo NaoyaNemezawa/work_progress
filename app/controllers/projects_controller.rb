@@ -26,10 +26,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def show
-    @tasks = @project.tasks
-  end
-
   def destroy
     @project.destroy
     redirect_to root_path
