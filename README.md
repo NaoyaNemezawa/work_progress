@@ -36,10 +36,9 @@ webアプリケーションとパッケージソフトを比較した場合、we
 | encrypted_password | string | null: false              |
 
 ### Association
-- has_many :projects through: :users_projects
-- has_many :comments through: :users_comments
 - has_many :users_projects
-- has_many :users_comments
+- has_many :projects through: :users_projects
+- has_many :comments
 
 ## Projectsテーブル
 
@@ -48,9 +47,9 @@ webアプリケーションとパッケージソフトを比較した場合、we
 | name               | string | null: false              |
 
 ### Association
+- has_many: users_projects
 - has_many: users through: :users_projects
 - has_many: tasks
-- has_many: users_projects
 
 ## UsersProjectsテーブル
 | Column             | Type      | Options                        |
@@ -67,7 +66,7 @@ webアプリケーションとパッケージソフトを比較した場合、we
 | Column             | Type      | Options                        |
 | ------------------ | --------- | ------------------------------ |
 | name               | string    | null: false                    |
-| specifics          | string    | none                           |
+| specifics          | text      | none                           |
 | project_id         | reference | null: false, foreign_key: true |
 
 ### Association
@@ -78,11 +77,10 @@ webアプリケーションとパッケージソフトを比較した場合、we
 
 | Column             | Type      | Options                        |
 | ------------------ | --------- | ------------------------------ |
-| text               | string    | null: false                    |
+| comment            | text      | null: false                    |
 | user_id            | reference | null: false ,foreign_key: true |
 | task_id            | reference | null: false ,foreign_key: true |
 
 ### Association
 - belongs_to: task
-- has_many: users_comments through: :users_comments
-- has_many: users_comments
+- belongs_to: user
