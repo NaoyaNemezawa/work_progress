@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :project_find
+  before_action :project_find, expect:[:destroy]
+  before_action :task_find, only:[:show,:edit,:update,:destroy] 
   def new
     @task = Task.new
   end
@@ -14,7 +15,22 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @task.update(task_params)
+      redirect_to project_path(params[:project_id])
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @task.destroy
+    redirect_to project_path(params[:project_id])
   end
 
   private
@@ -24,5 +40,9 @@ class TasksController < ApplicationController
 
   def project_find
     @project = Project.find(params[:project_id])
+  end
+
+  def task_find
+    @task = Task.find(params[:id])
   end
 end

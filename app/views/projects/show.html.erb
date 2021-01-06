@@ -13,8 +13,8 @@
             <p class="my-auto text-nowrap overflow-x"><%= "#{task.specifics}" %></p>
           </div>
           <div class="w-10 align-items-center d-flex flex-column">
-            <%=link_to "編集","#", :class => "f-size12 mb-1 text-reset " %>
-            <%=link_to "削除","#", :class => "f-size12 mt-1 text-reset " %>
+            <%=link_to "編集", edit_project_task_path(@project.id,task.id), :class => "f-size12 mb-1 text-reset " %>
+            <%=link_to "削除", project_task_path(@project.id,task.id), method: :delete, :class => "f-size12 mt-1 text-reset " %>
           </div>
         </div>
       <% end %>

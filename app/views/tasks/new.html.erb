@@ -1,13 +1,5 @@
 <h2>タスク作成画面</h2>
 <%= form_with model: @task,url: project_tasks_path(@project.id), local: true do |f| %>
-  <div class="field">
-    <%= f.label :タスク名 %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :詳細 %><br />
-    <%= f.text_area :specifics %>
-  </div>
-  <%= f.submit "タスク作成", :class =>"my-1" %>
+  <%= render partial: "from", locals: {f: f} %>
 <% end %>
 <%= link_to "戻る",project_path(@project.id) %>
