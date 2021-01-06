@@ -3,29 +3,18 @@
   <%= render "side_bar"%>
 
   <div class="col-9 p-0">
-    <div class="h90px d-flex flex-column justify-content-between border-bottom">
-      <div class="d-flex align-items-center">
-        <h2 class="mr-2"><%= @project.name %></h2>
-        <%= link_to "新しいメンバーを招待する", new_project_user_project_path(@project.id), :class=> "text-reset align-text-center" %>
-      </div>
-      <div class="d-flex">
-        <div><%= "参加メンバー#{@project.users.count}人" %></div>
-        <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
-            <li class="py-1 mx-1 f-size12 ">
-            <%= @project.users.map(&:name).join("") %></li>
-        </ul>
-      </div>
-    </div>
+  <%= render "main_header", project: @project, task: nil %>
+    
     <div class="overflow-auto h_calc100vh-90px">
-      <% 20.times do |i| %>
-        <div class="d-flex justify-content-between border py-1 m-2">
-            <a href="#" class="text-reset py-2 my-auto mx-1">
-            <%= "作業#{i+1}"%></a>
-            <%# <p class="my-auto">最終コメント</p> %>
-          <div class="d-flex align-items-center px-2">
-            <a href="#" class="f-size12 text-reset p-1 mx-1">
-            編集</a>
-            <%=link_to "削除","#", :class => "f-size12 text-reset p-1 mx-1" %>
+      <% @tasks.each do |task| %>
+        <div class="d-flex justify-content-between border py-1 m-1">
+          <div class=" align-items-center px-2 w-90">
+            <%= link_to task.name ,project_task_path(@project.id,task.id), :class => "text-reset py-2 my-auto mx-1"%>
+            <p class="my-auto text-nowrap overflow-x"><%= "#{task.specifics}" %></p>
+          </div>
+          <div class="w-10 align-items-center d-flex flex-column">
+            <%=link_to "編集", edit_project_task_path(@project.id,task.id), :class => "f-size12 mb-1 text-reset " %>
+            <%=link_to "削除", project_task_path(@project.id,task.id), method: :delete, :class => "f-size12 mt-1 text-reset " %>
           </div>
         </div>
       <% end %>

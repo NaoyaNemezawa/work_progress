@@ -1,0 +1,28 @@
+<div class="container-fliid d-flex">
+
+  <%= render "projects/side_bar"%>
+
+  <div class="col-9 p-0">
+
+    <%= render "projects/main_header", project: @project, task: @task %>
+    <div>
+      <input placeholder="コメント投稿欄">
+    </div>
+    <%# メイン %>
+    <div class="overflow-auto h_calc100vh-90px">
+      <% 20.times do |i| %>
+        <div class="d-flex justify-content-between border py-1 m-2">
+            <a href="#" class="text-reset py-2 my-auto mx-1">
+            <%= "コメント#{i+1}"%></a>
+            <%# <p class="my-auto">最終コメント</p> %>
+          <div class="d-flex align-items-center px-2">
+            <a href="#" class="f-size12 text-reset p-1 mx-1">
+            編集</a>
+            <%=link_to "削除","#", :class => "f-size12 text-reset p-1 mx-1" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%# メインここまで %>
+  </div>
+</div>
