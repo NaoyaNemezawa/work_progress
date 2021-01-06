@@ -3,7 +3,7 @@
   <%= render "side_bar"%>
 
   <div class="col-9 p-0">
-  <%= render "projects/main_header" %>
+  <%= render "main_header", project: @project, task: nil %>
     
     <div class="overflow-auto h_calc100vh-90px">
       <% @tasks.each do |task| %>

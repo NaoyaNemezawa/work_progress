@@ -1,26 +1,26 @@
 <div class="h90px d-flex flex-column  border-bottom">
   <div class="d-flex align-items-center">
-    <h3 class="mr-2 mb-0"><%= @project.name %></h3>
-    <%= link_to "メンバー追加", new_project_user_project_path(@project.id), :class=> "text-reset align-text-center" %>
-    <%= link_to "タスク追加",  new_project_task_path(@project.id), :class=> "ml-2 text-reset align-text-center" %>
+    <h3 class="mr-2 mb-0"><%= project.name %></h3>
+    <%= link_to "メンバー追加", new_project_user_project_path(project.id), :class=> "text-reset align-text-center" %>
+    <%= link_to "タスク追加",  new_project_task_path(project.id), :class=> "ml-2 text-reset align-text-center" %>
   </div>
   
   <div class="d-flex">
-    <p class="f-size12 m-0"><%= "参加メンバー#{@project.users.count}人" %></p>
+    <p class="f-size12 m-0"><%= "参加メンバー#{project.users.count}人" %></p>
     <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
       <li class="mx-1 f-size12 ">
-      <%= @project.users.map(&:name).join("") %></li>
+      <%= project.users.map(&:name).join("") %></li>
     </ul>
   </div>
-  <% if @task %>
+  <% if task %>
     <div class="f-size12 align-items-centerpx-2">
       <div class="d-flex">
         <p class="flex-shrink-0 my-0 ">現在のタスク：</p>
-        <p class="my-0 text-nowrap overflow-x"><%= @task.name %></p>
+        <p class="my-0 text-nowrap overflow-x"><%= task.name %></p>
       </div>
       <div class="d-flex">
         <p class="my-0 flex-shrink-0">タスク詳細：</p>
-        <p class="my-0 text-nowrap overflow-x"><%= @task.specifics %></p>
+        <p class="my-0 text-nowrap overflow-x"><%= task.specifics %></p>
       </div>
     </div>
   <% end %>
