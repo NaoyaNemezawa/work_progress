@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :find
+  before_action :find_data
   def index
     @comment = Comment.new
   end
@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to root_path
+      redirect_to project_task_comments_path(@project.id,@task.id)
     else
       render :index
     end
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to root_path
+    redirect_to project_task_comments_path(@project.id,@task.id)
   end
 
   private
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:comment).merge(user_id: current_user.id, task_id: params[:task_id])
   end
 
-  def find
+  def find_data
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:task_id])
     @comments = @task.comments.includes(:user)
