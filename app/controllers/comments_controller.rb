@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      redirect_to project_task_comments_path(@project.id,@task.id)
+      redirect_to index_comments
     else
       render :index
     end
@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to project_task_comments_path(@project.id,@task.id)
+    redirect_to index_comments
   end
 
   private
@@ -28,5 +28,9 @@ class CommentsController < ApplicationController
     @project = Project.find(params[:project_id])
     @task = Task.find(params[:task_id])
     @comments = @task.comments.includes(:user)
+  end
+
+  def index_comments
+    project_task_comments_path(@project.id,@task.id)
   end
 end

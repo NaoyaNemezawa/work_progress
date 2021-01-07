@@ -2,5 +2,5 @@ class Task < ApplicationRecord
   validates :name, presence: true
   
   belongs_to :project
-  has_many :comments
+  has_many :comments, dependent: :destroy
 end
