@@ -1,11 +1,11 @@
 class TasksController < ApplicationController
   before_action :project_find, except:[:destroy]
-  before_action :task_find, only:[:show,:edit,:update,:destroy] 
+  before_action :task_find, only:[:edit,:update,:destroy] 
 
   def index
     @tasks = @project.tasks
   end
-  
+
   def new
     @task = Task.new
   end
