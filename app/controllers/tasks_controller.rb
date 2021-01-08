@@ -1,6 +1,11 @@
 class TasksController < ApplicationController
-  before_action :project_find, expect:[:destroy]
-  before_action :task_find, only:[:show,:edit,:update,:destroy] 
+  before_action :project_find, except:[:destroy]
+  before_action :task_find, only:[:edit,:update,:destroy] 
+
+  def index
+    @tasks = @project.tasks
+  end
+
   def new
     @task = Task.new
   end
@@ -8,13 +13,10 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to project_path(params[:project_id])
+      redirect_to index_tasks
     else
       render :new
     end
-  end
-
-  def show
   end
 
   def edit
@@ -22,7 +24,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to project_path(params[:project_id])
+      redirect_to index_tasks
     else
       render :edit
     end
@@ -30,7 +32,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to project_path(params[:project_id])
+    redirect_to index_tasks
   end
 
   private
@@ -44,5 +46,9 @@ class TasksController < ApplicationController
 
   def task_find
     @task = Task.find(params[:id])
+  end
+
+  def index_tasks
+    project_tasks_path(params[:project_id])
   end
 end

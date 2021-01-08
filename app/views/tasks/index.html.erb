@@ -1,20 +1,20 @@
 <div class="container-fliid d-flex">
 
-  <%= render "side_bar"%>
+  <%= render "projects/side_bar"%>
 
   <div class="col-9 p-0">
-  <%= render "main_header", project: @project, task: nil %>
+  <%= render "projects/main_header", project: @project, task: nil %>
     
     <div class="overflow-auto h_calc100vh-90px">
       <% @tasks.each do |task| %>
         <div class="d-flex justify-content-between border py-1 m-1">
           <div class=" align-items-center px-2 w-90">
-            <%= link_to task.name ,project_task_path(@project.id,task.id), :class => "text-reset py-2 my-auto mx-1"%>
+            <%= link_to task.name ,project_task_comments_path(@project.id,task.id), class:  "text-reset py-2 my-auto mx-1"%>
             <p class="my-auto text-nowrap overflow-x"><%= "#{task.specifics}" %></p>
           </div>
           <div class="w-10 align-items-center d-flex flex-column">
-            <%=link_to "編集", edit_project_task_path(@project.id,task.id), :class => "f-size12 mb-1 text-reset " %>
-            <%=link_to "削除", project_task_path(@project.id,task.id), method: :delete, :class => "f-size12 mt-1 text-reset " %>
+            <%=link_to "編集", edit_project_task_path(@project.id,task.id), class:  "f-size12 mb-1 text-reset " %>
+            <%=link_to "削除", project_task_path(@project.id,task.id), method: :delete, class:  "f-size12 mt-1 text-reset " %>
           </div>
         </div>
       <% end %>
