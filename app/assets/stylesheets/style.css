@@ -51,11 +51,18 @@ li{
   border-radius: 10px;
   margin: 20px auto 0 auto;
   padding: 10px;
-  width: 60%;
   text-align: center;
 }
 
-.form-field{
-  width: 90%;
+.w-60{
+  width: 60%;
+}
+
+.outline{
   outline: 0;
+}
+
+.login{
+  background: rgba(255, 255, 255, 0.7);
+  text-align: center;
 }
