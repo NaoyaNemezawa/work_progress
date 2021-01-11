@@ -36,3 +36,26 @@ li{
 .w-90{
   width: 90%;
 }
+
+.sign_image{
+  background-image: url("/assets/3592803_s.jpg");
+  background-size: cover;
+}
+
+.f-size-20{
+  font-size: 20px;
+}
+
+.entry{
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  margin: 20px auto 0 auto;
+  padding: 10px;
+  width: 60%;
+  text-align: center;
+}
+
+.form-field{
+  width: 90%;
+  outline: 0;
+}
