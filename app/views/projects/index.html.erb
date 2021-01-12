@@ -1,78 +1,9 @@
-<header class="d-flex bg-dark text-white py-2">
-  <p class="col-3 my-auto"><%= "#{current_user.name}さん"%></p>
-  <p class="col-6 text-center my-auto">WorkProgress</p>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-reset text-right col-3" %>
-</header>
-
+<%= render "header" %>
 <div class="container-fliid d-flex">
-
-  <%# <%= render "side_bar"%>
-  <div class="col-2 p-0 vh-100 bg-secondary text-white">
-  <div class="overflow-auto h_calc100vh-90px">
-  <div class="d-flex my-1" >
-    <p class="my-auto mr-2 f-size14">プロジェクト一覧</p>
-    <%= link_to "+", new_project_path, class: "align-self-center text-reset f-size14 px-1", data: {"turbolinks" => false} %>
-    </div>
-    <% current_user.projects.each do |project| %>
-      <div class="d-flex justify-content-between py-2">
-       <%= link_to project.name, project_tasks_path(project.id), class: "text-reset align-text-center py-1 my-auto mx-1 f-size14" %>
-      </div>
-    <% end %>
-  </div>
-</div>
-<%# ミドルバー %>
-  <div class="col-3 p-0 bg-darkgray text-white">
-    <%# メンバー一覧 %>
-    <div class="h50px d-flex flex-column justify-content-between">
-      <div class="d-flex">
-        <div>参加メンバー30人</div>
-        <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
-          <% 30.times do |i|%>
-            <li class="py-1 mx-1 f-size12 ">
-            <%="メンバー#{i+1}"%></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <%# メンバー一覧ここまで %>
-    <%# タスク一覧 %>
-    <div class="overflow-auto h_calc100vh-50px">
-      <% 20.times do |i| %>
-        <div class="d-flex justify-content-between py-1 m-2">
-            <a href="#" class="text-reset py-2 my-auto mx-1">
-            <%= "タスク#{i+1}"%></a>
-            <%# <p class="my-auto">最終コメント</p> %>
-          <div class="d-flex align-items-center px-2">
-            <a href="#" class="f-size12 text-reset p-1 mx-1">
-            編集</a>
-            <%=link_to "削除","#", class: "f-size12 text-reset p-1 mx-1" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <%# タスク一覧ここまで %>
-  </div>
-  <%# ミドルバーここまで %>
+  <%# プロジェクト一覧 %>
+  <%= render "side_bar2" %>
+  <%# タスク一覧 %>
+  <%= render "middle_ber" %>
   <%# コメント画面 %>
-  <div class="col-7 p-0 bg-eee"> 
-    <form class="h50px d-flex">
-      <input type="text" class="h-75 w-75 mx-2 outline align-self-center" placeholder="コメント">
-      <input type="submit" class="h-75 align-self-center">
-    </form>
-  <div class="overflow-auto h_calc100vh-50px">
-    <% 20.times do |i| %>
-        <div class="d-flex justify-content-between py-1 m-2">
-            <a href="#" class="text-reset py-2 my-auto mx-1">
-            <%= "コメント#{i+1}"%></a>
-            <%# <p class="my-auto">最終コメント</p> %>
-          <div class="d-flex align-items-center px-2">
-            <a href="#" class="f-size12 text-reset p-1 mx-1">
-            編集</a>
-            <%=link_to "削除","#", class: "f-size12 text-reset p-1 mx-1" %>
-          </div>
-        </div>
-      <% end %>
-  </div>
-  <%# コメント画面ここまで %>
-  </div>
+  <%= render "comments" %>
 </div>
