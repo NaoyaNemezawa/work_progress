@@ -1,7 +1,7 @@
 <div class="col-3 p-0 bg-darkgray text-white">
   <%# メンバー一覧 %>
   <% if tasks %>
-    <div class="h50px d-flex flex-column justify-content-between">
+    <div class="h50px d-flex flex-column border justify-content-between">
       <div class="d-flex">
         <div><%= "参加メンバー#{project.users.count}人" %>
           <%= link_to "+", new_project_user_project_path(project.id), class: "text-reset"%>
@@ -14,7 +14,7 @@
     </div>
     <%# メンバー一覧ここまで %>
     <%# タスク一覧 %>
-    <div class="overflow-auto h_calc100vh-50px">
+    <div class="overflow-auto">
     <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
       <% tasks.each do |task| %>
         <div class="d-flex justify-content-between py-1 m-2">

@@ -4,7 +4,7 @@
       <%= f.text_field :comment, class:"h-75 w-75 mx-2 outline align-self-center", placeholder:"コメント" %>
       <%= f.submit "コメントする", class:"h-75 align-self-center" %>
     <% end %>
-    <div class="overflow-auto h_calc100vh-50px">
+    <div class="overflow-auto">
     <%# タスクの詳細とコメント一覧 %>
       <p class="overflow-x white-space"><%= task.specifics %></p>
       <% comments.each do |comment| %>

@@ -2,8 +2,8 @@
   height: 50px;
 }
 
-.h_calc100vh-50px{
-  height: calc(100vh - 50px);
+.h_calc100vh-40px{
+  height: calc(100vh - 40px);
 }
 
 .f-size12{
