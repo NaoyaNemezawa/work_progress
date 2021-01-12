@@ -1,9 +1,9 @@
 <div class="col-7 p-0 bg-eee"> 
   <% if comments %>
-    <form class="h50px d-flex">
-      <input type="text" class="h-75 w-75 mx-2 outline align-self-center" placeholder="コメント">
-      <input type="submit" class="h-75 align-self-center">
-    </form>
+    <%= form_with model: @comment,url:project_task_comments_path(project.id,task.id), class:"h50px d-flex", local: true do |f| %>
+      <%= f.text_field :comment, class:"h-75 w-75 mx-2 outline align-self-center", placeholder:"コメント" %>
+      <%= f.submit "コメントする", class:"h-75 align-self-center" %>
+    <% end %>
     <div class="overflow-auto h_calc100vh-50px">
       <% comments.each do |comment| %>
         <div class="d-flex justify-content-between py-1 m-2">
