@@ -1,29 +1,9 @@
+<%= render "projects/header" %>
 <div class="container-fliid d-flex">
-
-  <%= render "projects/side_bar"%>
-
-  <div class="col-9 p-0">
-
-    <%= render "projects/main_header", project: @project, task: @task %>
-    <div>
-      <%= form_with model:@comment, url: project_task_comments_path(@project.id,@task.id), local: true do |f| %>
-      <%= f.text_field :comment, placeholder: "コメント投稿欄" %>
-      <%= f.submit "投稿" %>
-      <% end %>
-    </div>
-    <%# メイン %>
-    <div class="overflow-auto h_calc100vh-90px">
-      <% @comments.each do |c| %>
-        <div class="d-flex justify-content-between border py-1 m-2">
-            <p href="#" class="text-reset py-2 my-auto mx-1">
-            <%= c.comment %></p>
-          <div class="d-flex align-items-center px-2">
-            <%= link_to "編集", "#", class: "f-size12 text-reset p-1 mx-1" %>
-            <%= link_to "削除", project_task_comment_path(@project.id,@task.id,c.id), method: :delete, class: "f-size12 text-reset p-1 mx-1" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <%# メインここまで %>
-  </div>
+  <%# プロジェクト一覧 %>
+  <%= render "projects/side_bar2"%>
+  <%# タスク一覧 %>
+  <%= render "projects/middle_ber", project: @project, tasks: @tasks %>
+  <%# メイン画面 %>
+  <%= render "projects/comments",comments: @comments %>
 </div>

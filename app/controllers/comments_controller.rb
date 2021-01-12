@@ -26,6 +26,7 @@ class CommentsController < ApplicationController
 
   def find_data
     @project = Project.find(params[:project_id])
+    @tasks = @project.tasks
     @task = Task.find(params[:task_id])
     @comments = @task.comments.includes(:user)
   end
