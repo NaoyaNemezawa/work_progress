@@ -1,13 +1,17 @@
-.h90px{
-  height: 90px;
+.h50px{
+  height: 50px;
 }
 
-.h_calc100vh-90px{
-  height: calc(100vh - 90px);
+.h_calc100vh-50px{
+  height: calc(100vh - 50px);
 }
 
 .f-size12{
   font-size: 12px;
+}
+
+.f-size14{
+  font-size: 14px;
 }
 
 li{
@@ -65,4 +69,12 @@ li{
 .login{
   background: rgba(255, 255, 255, 0.7);
   text-align: center;
+}
+
+.bg-darkgray{
+  background-color: darkgray;
+}
+
+.bg-eee{
+  background-color: #EEE;
 }
