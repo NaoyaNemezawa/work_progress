@@ -15,7 +15,8 @@
     <%# メンバー一覧ここまで %>
     <%# タスク一覧 %>
     <div class="overflow-auto h_calc100vh-50px">
-      <% @tasks.each do |task| %>
+    <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
+      <% tasks.each do |task| %>
         <div class="d-flex justify-content-between py-1 m-2">
           <%= link_to task.name, project_task_comments_path(project.id,task.id), class: "text-reset py-2 my-auto mx-1" %>
           <div class="d-flex align-items-center px-2">
