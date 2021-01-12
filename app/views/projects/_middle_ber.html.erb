@@ -1,7 +1,7 @@
 <div class="col-3 p-0 bg-darkgray text-white">
   <%# メンバー一覧 %>
   <% if tasks %>
-    <div class="h50px d-flex flex-column border justify-content-between">
+    <div class="h50px d-flex flex-column justify-content-between">
       <div class="d-flex">
         <div><%= "参加メンバー#{project.users.count}人" %>
           <%= link_to "+", new_project_user_project_path(project.id), class: "text-reset"%>
