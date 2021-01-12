@@ -1,32 +1,32 @@
 <div class="col-3 p-0 bg-darkgray text-white">
   <%# メンバー一覧 %>
-  <div class="h50px d-flex flex-column justify-content-between">
-    <div class="d-flex">
-      <div>参加メンバー30人</div>
-      <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
-        <% 30.times do |i|%>
-          <li class="py-1 mx-1 f-size12 ">
-          <%="メンバー#{i+1}"%></li>
-        <% end %>
-      </ul>
+  <% if tasks %>
+    <div class="h50px d-flex flex-column justify-content-between">
+      <div class="d-flex">
+        <div><%= "参加メンバー#{project.users.count}人" %></div>
+        <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
+          <li class="mx-1 f-size12 ">
+          <%= project.users.map(&:name).join("") %></li>
+        </ul>
+      </div>
     </div>
-  </div>
     <%# メンバー一覧ここまで %>
     <%# タスク一覧 %>
-  <div class="overflow-auto h_calc100vh-50px">
-    <% 20.times do |i| %>
-      <div class="d-flex justify-content-between py-1 m-2">
-        <a href="#" class="text-reset py-2 my-auto mx-1">
-        <%= "タスク#{i+1}"%></a>
-         <%# <p class="my-auto">最終コメント</p> %>
-        <div class="d-flex align-items-center px-2">
-          <a href="#" class="f-size12 text-reset p-1 mx-1">
-          編集</a>
-          <%=link_to "削除","#", class: "f-size12 text-reset p-1 mx-1" %>
+    <div class="overflow-auto h_calc100vh-50px">
+      <% @tasks.each do |task| %>
+        <div class="d-flex justify-content-between py-1 m-2">
+          <a href="#" class="text-reset py-2 my-auto mx-1">
+          <%= task.name %></a>
+           <%# <p class="my-auto">最終コメント</p> %>
+          <div class="d-flex align-items-center px-2">
+            <a href="#" class="f-size12 text-reset p-1 mx-1">
+            編集</a>
+            <%=link_to "削除","#", class: "f-size12 text-reset p-1 mx-1" %>
+          </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-  <%# タスク一覧ここまで %>
+      <% end %>
+    </div>
+      <%# タスク一覧ここまで %>
+  <%end%>
 </div>
 <%# ミドルバーここまで %>
