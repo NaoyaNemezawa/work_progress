@@ -5,6 +5,8 @@
       <%= f.submit "コメントする", class:"h-75 align-self-center" %>
     <% end %>
     <div class="overflow-auto h_calc100vh-50px">
+    <%# タスクの詳細とコメント一覧 %>
+      <p class="overflow-x white-space"><%= task.specifics %></p>
       <% comments.each do |comment| %>
         <div class="d-flex justify-content-between py-1 m-2">
           <a href="#" class="text-reset py-2 my-auto mx-1">
