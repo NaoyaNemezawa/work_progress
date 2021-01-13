@@ -3,10 +3,9 @@
   <div class="overflow-auto ">
     <div class="d-flex my-1" >
       <p class="my-auto mr-2 f-size14">プロジェクト一覧</p>
-      <div class="cursor-pointer my-auto f-size12" data-toggle="modal" data-target="#modal1">追加</div>
       <%# ドロップダウン %>
       <div class="dropdown">
-        <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           ++
         </div>
         <div class="dropdown-menu overflow-y" aria-labelledby="dropdown1">
@@ -28,7 +27,8 @@
     </div>
     <% current_user.projects.each do |project| %>
       <div class="d-flex justify-content-between py-2">
-         <%= link_to project.name, project_tasks_path(project.id), class: "text-reset align-text-center py-1 my-auto mx-1 f-size14" %>
+         <%= link_to project.name, project_tasks_path(project.id), class: "text-reset align-text-center py-1 my-auto mx-1 f-size1vw" %>
+         <%= link_to "削除", project_path(project.id),method: :delete, class: "text-reset align-text-center py-1 my-auto mx-1 f-size1vw" %>
       </div>
     <% end %>
   </div>
