@@ -2,20 +2,19 @@
   <%# メンバー一覧 %>
   <% if tasks %>
     <div class="h50px d-flex flex-column justify-content-between">
-      <div class="d-flex">
-        <div><%= "参加メンバー#{project.users.count}人" %>
-          <%= link_to "+", new_project_user_project_path(project.id), class: "text-reset"%>
-        </div>
-        <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
+      <div class="d-flex f-size14">
+        <%= "メンバー#{project.users.count}人" %>
+        <ul class="d-flex overflow-x w-50 white-space p-0 m-0">
           <li class="mx-1 f-size12 ">
           <%= project.users.map(&:name).join("") %></li>
         </ul>
+        <%= link_to "招待", new_project_user_project_path(project.id), class: "text-reset pl-2 f-size12"%>
       </div>
+      <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
     </div>
     <%# メンバー一覧ここまで %>
     <%# タスク一覧 %>
     <div class="overflow-auto">
-    <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
       <% tasks.each do |task| %>
         <div class="d-flex justify-content-between py-1 m-2">
           <%= link_to task.name, project_task_comments_path(project.id,task.id), class: "text-reset py-2 my-auto mx-1" %>
