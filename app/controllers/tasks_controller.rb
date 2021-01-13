@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   before_action :task_find, only:[:edit,:update,:destroy] 
 
   def index
+    @newproject = Project.new
     @tasks = @project.tasks
   end
 

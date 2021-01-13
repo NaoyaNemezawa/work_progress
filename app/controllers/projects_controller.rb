@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :project_find, only:[:show, :destroy]
   def index
+    @newproject = Project.new
   end
 
   def new

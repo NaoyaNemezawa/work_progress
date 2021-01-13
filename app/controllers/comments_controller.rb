@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
   end
 
   def find_data
+    @newproject = Project.new
     @project = Project.find(params[:project_id])
     @tasks = @project.tasks
     @task = Task.find(params[:task_id])

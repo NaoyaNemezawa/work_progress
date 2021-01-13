@@ -1,8 +1,9 @@
+<%= javascript_include_tag "/assets/addform.js", "data-turbolinks-eval" => false %> 
 <div class="col-2 p-0 bg-secondary text-white">
   <div class="overflow-auto ">
     <div class="d-flex my-1" >
       <p class="my-auto mr-2 f-size14">プロジェクト一覧</p>
-      <%= link_to "+", new_project_path, class: "align-self-center text-reset f-size14 px-1", data: {"turbolinks" => false} %>
+      <div class="cursor-pointer my-auto f-size12" data-toggle="modal" data-target="#modal1">追加</div>
     </div>
     <% current_user.projects.each do |project| %>
       <div class="d-flex justify-content-between py-2">
@@ -11,3 +12,28 @@
     <% end %>
   </div>
 </div>
+<%# モーダル %>
+      <div class="modal fade text-dark " id="modal1" tabindex="-1">
+        <div class="modal-dialog position-avsolute">
+          <div class="modal-content">
+            <%= form_with model: @newproject, local: true do |f| %>
+              <div class="modal-body" >
+                新しいプロジェクト名を入力してください
+                <%= f.text_field :name, placeholder: "プロジェクト名" %><br/>
+                メンバーのメールアドレスを入力してください（任意）
+                <div class ="form my-1" id = "form[0]">
+                  <input name="project[emails][]" id = "input" placeholder="メンバーのemail">
+                </div>
+                <span class="border width-150 text-center cursor-pointer my-2" id="add_btn">入力欄を追加する</span>
+                <span class="border width-150 text-center cursor-pointer d-none my-2" id="close_btn">入力欄を削除する</span>
+                <input name="project[user_ids][]" type="hidden" value=<%= current_user.id%> >
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <%= f.submit "OK", class:"btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <%# モーダル %>
