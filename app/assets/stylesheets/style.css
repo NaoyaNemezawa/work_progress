@@ -25,6 +25,7 @@ li{
 .white-space{
   white-space: nowrap;
 }
+
 .cursor-pointer{
   cursor: pointer;
 }
@@ -90,4 +91,10 @@ li{
 
 .bg-eee{
   background-color: #EEE;
+}
+
+.overflow-y{
+  overflow-y: auto;
+  max-height: 200px;
+  background: rgba(255, 255, 255, 0.5);
 }
