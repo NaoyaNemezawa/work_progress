@@ -28,8 +28,8 @@
         </div>
         <div class="dropdown-menu">
           <%= form_with model: @newtask, url: project_tasks_path(project.id), local: true do |f| %>
-           <%= f.text_field :name, placeholder:"タスクネーム" %>
-           <%= f.text_area :specifics, placeholder:"タスク詳細" %>
+           <%= f.text_field :name, class: "outline mb-2", placeholder:"タスクネーム" %>
+           <%= f.text_area :specifics, class:"outline", placeholder:"タスク詳細" %>
            <%= f.submit "タスク作成" %>
           <% end %>
         </div>

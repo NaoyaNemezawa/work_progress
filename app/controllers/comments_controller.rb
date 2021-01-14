@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
     @tasks = @project.tasks
     @task = Task.find(params[:task_id])
     @comments = @task.comments.includes(:user)
+    @newtask = Task.new
   end
 
   def index_comments

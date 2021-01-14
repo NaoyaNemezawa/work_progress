@@ -106,3 +106,7 @@ li{
 .vh100-80px{
   height: calc(100vh - 80px);
 }
+
+.field_with_errors {
+  display: contents;
+}

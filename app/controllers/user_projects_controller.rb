@@ -5,7 +5,6 @@ class UserProjectsController < ApplicationController
   end
 
   def create
-    binding.pry
     @user_project = UserProject.new
     user = User.find_by(email: params[:email])
     @user_project[:project_id] = params[:project_id]

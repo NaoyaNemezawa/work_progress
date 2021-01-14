@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    binding.pry
+    @tasks = @project.tasks
     @newtask = Task.new(task_params)
     if @newtask.save
       redirect_to index_tasks
