@@ -8,7 +8,6 @@
           <li class="mx-1 f-size12 ">
           <%= project.users.map(&:name).join("") %></li>
         </ul>
-        <%# <%= link_to "招待", new_project_user_project_path(project.id), class: "text-reset pl-2 f-size12"%> 
         <div class="dropdown">
           <div class="dropdown f-size12 cursor-pointer pl-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
             招待
@@ -22,7 +21,19 @@
           </div>
         </div>
       </div>
-      <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
+      <%# <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
+      <div class="dropdown">
+        <div class="dropdown corsor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          タスク追加
+        </div>
+        <div class="dropdown-menu">
+          <%= form_with model: @newtask, url: project_tasks_path(project.id), local: true do |f| %>
+           <%= f.text_field :name, placeholder:"タスクネーム" %>
+           <%= f.text_area :specifics, placeholder:"タスク詳細" %>
+           <%= f.submit "タスク作成" %>
+          <% end %>
+        </div>
+      </div>
     </div>
     <%# メンバー一覧ここまで %>
     <%# タスク一覧 %>

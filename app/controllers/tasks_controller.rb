@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   def index
     @newproject = Project.new
     @tasks = @project.tasks
+    @newtask = Task.new
   end
 
   def new
@@ -12,11 +13,12 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    if @task.save
+    binding.pry
+    @newtask = Task.new(task_params)
+    if @newtask.save
       redirect_to index_tasks
     else
-      render :new
+      render :index
     end
   end
 
