@@ -8,7 +8,19 @@
           <li class="mx-1 f-size12 ">
           <%= project.users.map(&:name).join("") %></li>
         </ul>
-        <%= link_to "招待", new_project_user_project_path(project.id), class: "text-reset pl-2 f-size12"%>
+        <%# <%= link_to "招待", new_project_user_project_path(project.id), class: "text-reset pl-2 f-size12"%> 
+        <div class="dropdown">
+          <div class="dropdown f-size12 cursor-pointer pl-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+            招待
+          </div>
+          <div class="dropdown-menu dropdown-menu-right">
+            メンバーを追加します。
+            <%= form_with model: @user_project, url: project_user_projects_path(project.id), local: true do |f| %>
+              <%= f.text_field :email, placeholder:"追加メンバーのemail" %>
+              <%= f.submit "招待" %>
+            <% end %>
+          </div>
+        </div>
       </div>
       <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
     </div>
