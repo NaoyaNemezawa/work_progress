@@ -1,0 +1,54 @@
+<div class="col-3 p-0 bg-darkgray text-white">
+  <%# メンバー一覧 %>
+  <% if tasks %>
+    <div class="h50px d-flex flex-column justify-content-between">
+      <div class="d-flex f-size14">
+        <%= "メンバー#{project.users.count}人" %>
+        <ul class="d-flex overflow-x w-50 white-space p-0 m-0">
+          <li class="mx-1 f-size12 ">
+          <%= project.users.map(&:name).join("") %></li>
+        </ul>
+        <div class="dropdown">
+          <div class="dropdown f-size12 cursor-pointer pl-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+            招待
+          </div>
+          <div class="dropdown-menu dropdown-menu-right">
+            メンバーを追加します。
+            <%= form_with model: @user_project, url: project_user_projects_path(project.id), local: true do |f| %>
+              <%= f.text_field :email, placeholder:"追加メンバーのemail" %>
+              <%= f.submit "招待" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <%# <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
+      <div class="dropdown">
+        <div class="dropdown corsor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          タスク追加
+        </div>
+        <div class="dropdown-menu">
+          <%= form_with model: @newtask, url: project_tasks_path(project.id), local: true do |f| %>
+           <%= f.text_field :name, class: "outline mb-2", placeholder:"タスクネーム" %>
+           <%= f.text_area :specifics, class:"outline", placeholder:"タスク詳細" %>
+           <%= f.submit "タスク作成" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%# メンバー一覧ここまで %>
+    <%# タスク一覧 %>
+    <div class="overflow-auto">
+      <% tasks.each do |task| %>
+        <div class="d-flex justify-content-between py-1 m-2">
+          <%= link_to task.name, project_task_comments_path(project.id,task.id), class: "text-reset py-2 my-auto mx-1" %>
+          <div class="d-flex align-items-center px-2">
+            <a href="#" class="f-size12 text-reset p-1 mx-1">
+            編集</a>
+            <%=link_to "削除",project_task_path(project.id,task.id), method: :delete, class: "f-size12 text-reset p-1 mx-1" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+      <%# タスク一覧ここまで %>
+  <%end%>
+</div>

@@ -3,7 +3,9 @@ class TasksController < ApplicationController
   before_action :task_find, only:[:edit,:update,:destroy] 
 
   def index
+    @newproject = Project.new
     @tasks = @project.tasks
+    @newtask = Task.new
   end
 
   def new
@@ -11,11 +13,12 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    if @task.save
+    @tasks = @project.tasks
+    @newtask = Task.new(task_params)
+    if @newtask.save
       redirect_to index_tasks
     else
-      render :new
+      render :index
     end
   end
 

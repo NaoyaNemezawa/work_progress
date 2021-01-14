@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :project_find, only:[:show, :destroy]
   def index
+    @newproject = Project.new
   end
 
   def new
@@ -8,6 +9,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    binding.pry
     flash[:error] = []
     params[:project][:emails].reject!(&:empty?)
     params[:project][:emails].each do |email|

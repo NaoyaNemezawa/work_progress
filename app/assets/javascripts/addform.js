@@ -1,4 +1,4 @@
-function form () {
+document.addEventListener("turbolinks:load", function(){
   let count_form = 0
   const addbtn = document.getElementById("add_btn");
   const closebtn = document.getElementById("close_btn")
@@ -14,7 +14,6 @@ function form () {
     clone_input.value = ""
     // 作成したクローンを一番下のフォームに挿入
     form.after(clone_form);
-    // closeform();
     closebtn.classList.remove("d-none")
   });
 
@@ -26,6 +25,4 @@ function form () {
       closebtn.classList.add("d-none")
     };
   })
-};
-
-window.addEventListener("load",form);
+})

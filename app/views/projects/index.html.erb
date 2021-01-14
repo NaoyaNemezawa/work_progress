@@ -1,40 +1,9 @@
-<div class="container-fliid d-flex">
-
+<%= render "header" %>
+<div class="container-fliid d-flex h_calc100vh-40px">
+  <%# プロジェクト一覧 %>
   <%= render "side_bar"%>
-
-  <div class="col-9 p-0">
-    <%# ヘッダー %>
-    <div class="h90px d-flex flex-column justify-content-between border-bottom">
-      <div class="d-flex align-items-center">
-        <h2 class="mr-2">プロジェクト名</h2>
-        <a href="#" class="text-reset align-text-center">メンバー追加</a>
-      </div>
-      <div class="d-flex">
-        <div>参加メンバー30人</div>
-        <ul class="d-flex overflow-x w-75 white-space p-0 m-0">
-          <% 30.times do |i|%>
-            <li class="py-1 mx-1 f-size12 ">
-            <%="メンバー#{i+1}"%></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-    <%# ヘッダーここまで %>
-    <%# メイン %>
-    <div class="overflow-auto h_calc100vh-90px">
-      <% 20.times do |i| %>
-        <div class="d-flex justify-content-between border py-1 m-2">
-            <a href="#" class="text-reset py-2 my-auto mx-1">
-            <%= "作業#{i+1}"%></a>
-            <%# <p class="my-auto">最終コメント</p> %>
-          <div class="d-flex align-items-center px-2">
-            <a href="#" class="f-size12 text-reset p-1 mx-1">
-            編集</a>
-            <%=link_to "削除","#", class: "f-size12 text-reset p-1 mx-1" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <%# メインここまで %>
-  </div>
+  <%# タスク一覧 %>
+  <%= render "middle_ber", project: nil, tasks: nil %>
+  <%# コメント画面 %>
+  <%= render "comments",comments: nil %>
 </div>
