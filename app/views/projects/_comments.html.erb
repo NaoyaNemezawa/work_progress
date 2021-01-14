@@ -1,0 +1,23 @@
+<div class="col-7 p-0 bg-eee"> 
+  <% if comments %>
+    <%= form_with model: @comment,url:project_task_comments_path(project.id,task.id), class:"h50px d-flex", local: true do |f| %>
+      <%= f.text_field :comment, class:"h-75 w-75 mx-2 outline align-self-center", placeholder:"コメント" %>
+      <%= f.submit "コメントする", class:"h-75 align-self-center" %>
+    <% end %>
+    <div class="overflow-auto">
+    <%# タスクの詳細とコメント一覧 %>
+      <p class="overflow-x white-space"><%= task.specifics %></p>
+      <% comments.each do |comment| %>
+        <div class="d-flex justify-content-between py-1 m-2">
+          <a href="#" class="text-reset py-2 my-auto mx-1">
+          <%= comment.comment %></a>
+          <div class="d-flex align-items-center px-2">
+            <a href="#" class="f-size12 text-reset p-1 mx-1">
+            編集</a>
+            <%=link_to "削除",project_task_comment_path(project.id,task.id,comment.id),method: :delete, class: "f-size12 text-reset p-1 mx-1" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <%end%>
+</div>

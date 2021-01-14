@@ -36,10 +36,9 @@ webアプリケーションとパッケージソフトを比較した場合、we
 | encrypted_password | string | null: false              |
 
 ### Association
-- has_many :projects through: :users_projects
-- has_many :comments through: :users_comments
 - has_many :users_projects
-- has_many :users_comments
+- has_many :projects through: :users_projects
+- has_many :comments
 
 ## Projectsテーブル
 
@@ -48,15 +47,15 @@ webアプリケーションとパッケージソフトを比較した場合、we
 | name               | string | null: false              |
 
 ### Association
+- has_many: users_projects
 - has_many: users through: :users_projects
 - has_many: tasks
-- has_many: users_projects
 
 ## UsersProjectsテーブル
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| user_id            | integer | null: false, foreign_key: true |
-| project_id         | integer | null: false, foreign_key: true |
+| Column             | Type      | Options                        |
+| ------------------ | --------- | ------------------------------ |
+| user_id            | reference | null: false, foreign_key: true |
+| project_id         | reference | null: false, foreign_key: true |
 
 ### Association
 - belongs_to: user
@@ -64,11 +63,11 @@ webアプリケーションとパッケージソフトを比較した場合、we
 
 ## Tasksテーブル
 
-| Column             | Type    | Options                  |
-| ------------------ | ------- | ------------------------ |
-| name               | string  | null: false              |
-| specifics          | string  | null: false              |
-| project_id         | integer | null: false              |
+| Column             | Type      | Options                        |
+| ------------------ | --------- | ------------------------------ |
+| name               | string    | null: false                    |
+| specifics          | text      | none                           |
+| project_id         | reference | null: false, foreign_key: true |
 
 ### Association
 - belongs_to: project
@@ -76,22 +75,12 @@ webアプリケーションとパッケージソフトを比較した場合、we
 
 ## Commentsテーブル
 
-| Column             | Type    | Options                  |
-| ------------------ | ------- | ------------------------ |
-| text               | string  | null: false              |
-| task_id            | integer | null: false              |
+| Column             | Type      | Options                        |
+| ------------------ | --------- | ------------------------------ |
+| comment            | text      | null: false                    |
+| user_id            | reference | null: false ,foreign_key: true |
+| task_id            | reference | null: false ,foreign_key: true |
 
 ### Association
 - belongs_to: task
-- has_many: users_comments through: :users_comments
-- has_many: users_comments
-
-## UsersCommentsテーブル
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| user_id            | integer | null: false, foreign_key: true |
-| comment_id         | integer | null: false, foreign_key: true |
-
-### Association
 - belongs_to: user
-- belongs_to: comment

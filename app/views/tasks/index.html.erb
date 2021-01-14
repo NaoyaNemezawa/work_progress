@@ -1,0 +1,9 @@
+<%= render "projects/header" %>
+<div class="container-fliid d-flex h_calc100vh-40px">
+  <%# プロジェクト一覧 %>
+  <%= render "projects/side_bar"%>
+  <%# タスク一覧 %>
+  <%= render "projects/middle_ber", project: @project, tasks: @tasks %>
+  <%# メイン画面 %>
+  <%= render "projects/comments",comments: nil %>
+</div>
