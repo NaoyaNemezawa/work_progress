@@ -1,0 +1,35 @@
+<%= javascript_include_tag "/assets/addform.js", "data-turbolinks-eval" => false %> 
+<div class="col-2 p-0 bg-secondary text-white">
+  <div class="d-flex my-1" >
+    <p class="my-auto mr-2 f-size14">プロジェクト一覧</p>
+    <%# ドロップダウン %>
+    <div class="dropdown">
+      <div class="dropdown f-size12 cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        追加
+      </div>
+      <div class="dropdown-menu overflow-y" aria-labelledby="dropdown1">
+        <%= form_with model: @newproject, local: true do |f| %>
+          <div class="f-size14">新プロジェクト名</div>
+          <%= f.text_field :name, class:"outline", placeholder: "プロジェクト名" %><br/>
+          <div class="f-size14">メンバーのメールアドレス（任意）</div>
+          <div class ="form my-1" id = "form[0]">
+            <input class="outline" name="project[emails][]" id = "input" placeholder="メンバーのemail">
+          </div>
+          <span class="border width-150 text-center cursor-pointer my-2" id="add_btn">入力欄を追加</span><br/>
+          <span class="border width-150 text-center cursor-pointer d-none my-2" id="close_btn">入力欄を削除</span><br/>
+          <input name="project[user_ids][]" type="hidden" value=<%= current_user.id%> >
+          <%= f.submit "プロジェクト作成", class:"bg-primary text-white my-2 rounded border-0" %>
+        <% end %>
+      </div>
+    </div>
+      <%# ドロップダウンここまで %>
+  </div>
+  <div class="overflow-auto vh100-80px">
+  <% current_user.projects.each do |project| %>
+    <div class="d-flex justify-content-between py-2">
+      <%= link_to project.name, project_tasks_path(project.id), class: "text-reset align-text-center py-1 my-auto mx-1 f-size1vw" %>
+      <%= link_to "削除", project_path(project.id),method: :delete, class: "text-reset align-text-center py-1 my-auto mx-1 f-size1vw" %>
+    </div>
+  <% end %>
+  </div>
+</div>

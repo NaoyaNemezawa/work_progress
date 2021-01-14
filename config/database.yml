@@ -11,7 +11,7 @@
 #
 default: &default
   adapter: mysql2
-  encoding: utf8mb4
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: WorkShare_development
+  database: work_progress_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: WorkShare_test
+  database: work_progress_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: WorkShare_production
-  username: WorkShare
-  password: <%= ENV['WORKSHARE_DATABASE_PASSWORD'] %>
+  database: work_progress_production
+  username: work_progress
+  password: <%= ENV['work_progress_DATABASE_PASSWORD'] %>

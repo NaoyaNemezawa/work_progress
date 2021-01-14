@@ -1,0 +1,18 @@
+<div class="sign_image vw-100 vh-100">
+  <h1 class="text-info">WorkProgressへようこそ</h1>
+
+  <div class="entry w-60">
+    <p class="f-size-20">WorkProgressでは業務の進捗状況を記録・共有することにより、チームでの作業を効率的に進めることができます。</p>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "border") do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザー名", class: "outline w-90" %>
+      <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", class: "outline w-90" %>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード（６桁以上）", class: "outline w-90" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード（確認用）", class: "outline w-90" %>
+
+      <%= f.submit "アカウントを作成する", class:"bg-primary text-white my-2 rounded border-0" %>
+    <% end %>
+    <%= render "users/shared/links" %>
+  </div>
+</div>
