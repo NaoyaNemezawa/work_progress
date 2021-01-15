@@ -1,19 +1,11 @@
 class TasksController < ApplicationController
-  before_action :project_find, except:[:destroy]
-  before_action :task_find, only:[:edit,:update,:destroy] 
+  before_action :find_data, only:[:index,:create]
 
   def index
-    @newproject = Project.new
-    @tasks = @project.tasks
     @newtask = Task.new
   end
 
-  def new
-    @task = Task.new
-  end
-
   def create
-    @tasks = @project.tasks
     @newtask = Task.new(task_params)
     if @newtask.save
       redirect_to index_tasks
@@ -22,18 +14,19 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def update
-    if @task.update(task_params)
-      redirect_to index_tasks
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   if @task.update(task_params)
+  #     redirect_to index_tasks
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   def destroy
+    @task = Task.find(params[:id])
     @task.destroy
     redirect_to index_tasks
   end
@@ -43,12 +36,10 @@ class TasksController < ApplicationController
     params.require(:task).permit(:name,:specifics).merge(project_id: params[:project_id])
   end
 
-  def project_find
+  def find_data
     @project = Project.find(params[:project_id])
-  end
-
-  def task_find
-    @task = Task.find(params[:id])
+    @tasks = @project.tasks
+    @newproject = Project.new
   end
 
   def index_tasks

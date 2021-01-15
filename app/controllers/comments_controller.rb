@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
   before_action :find_data
+  before_action :new_data, only:[:indexm,:create]
   def index
     @comment = Comment.new
   end
 
   def create
-    binding.pry
     @comment = Comment.new(comment_params)
     if @comment.save
       redirect_to index_comments
@@ -26,11 +26,14 @@ class CommentsController < ApplicationController
   end
 
   def find_data
-    @newproject = Project.new
     @project = Project.find(params[:project_id])
     @tasks = @project.tasks
     @task = Task.find(params[:task_id])
     @comments = @task.comments.includes(:user)
+  end
+
+  def new_data
+    @newproject = Project.new
     @newtask = Task.new
   end
 
