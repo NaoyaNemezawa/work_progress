@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :find_data, only:[:index,:create]
 
   def index
+    @user_project = UserProject.new
     @newtask = Task.new
   end
 
@@ -13,9 +14,6 @@ class TasksController < ApplicationController
       render :index
     end
   end
-
-  # def edit
-  # end
 
   # def update
   #   if @task.update(task_params)

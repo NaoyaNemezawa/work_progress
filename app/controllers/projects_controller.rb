@@ -9,7 +9,6 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    binding.pry
     flash[:error] = []
     params[:project][:emails].reject!(&:empty?)
     params[:project][:emails].each do |email|

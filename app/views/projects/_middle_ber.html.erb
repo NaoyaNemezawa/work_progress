@@ -1,6 +1,5 @@
 <div class="col-3 p-0 bg-darkgray text-white">
   <%# メンバー一覧 %>
-  <% if tasks %>
     <div class="h50px d-flex flex-column justify-content-between">
       <div class="d-flex f-size14">
         <%= "メンバー#{project.users.count}人" %>
@@ -21,12 +20,14 @@
           </div>
         </div>
       </div>
-      <%# <%= link_to "タスク追加", new_project_task_path(project.id), class: "text-reset" %>
+      <%# メンバー一覧ここまで %>
+      <%# タスク追加欄 %>
       <div class="dropdown">
         <div class="dropdown corsor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           タスク追加
         </div>
         <div class="dropdown-menu">
+          新しいタスクを作成します
           <%= form_with model: @newtask, url: project_tasks_path(project.id), local: true do |f| %>
            <%= f.text_field :name, class: "outline mb-2", placeholder:"タスクネーム" %>
            <%= f.text_area :specifics, class:"outline", placeholder:"タスク詳細" %>
@@ -35,7 +36,7 @@
         </div>
       </div>
     </div>
-    <%# メンバー一覧ここまで %>
+    <%# タスク追加欄ここまで %>
     <%# タスク一覧 %>
     <div class="overflow-auto">
       <% tasks.each do |task| %>
@@ -50,5 +51,4 @@
       <% end %>
     </div>
       <%# タスク一覧ここまで %>
-  <%end%>
 </div>

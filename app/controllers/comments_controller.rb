@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   before_action :new_data, only:[:indexm,:create]
   def index
     @comment = Comment.new
+    @user_project = UserProject.new
   end
 
   def create
