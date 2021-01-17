@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_data
-  before_action :new_data, only:[:indexm,:create]
+  before_action :new_data, only:[:index,:create]
   def index
     @comment = Comment.new
     @user_project = UserProject.new

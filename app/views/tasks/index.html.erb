@@ -1,11 +1,14 @@
 <%= render "projects/header" %>
+<%= render "projects/error_flash" %>
 <div class="container-fliid d-flex h_calc100vh-40px">
   <%# プロジェクト一覧 %>
   <%= render "projects/side_bar"%>
   <%# タスク一覧 %>
   <%= render "projects/middle_ber", project: @project, tasks: @tasks %>
   <%# メイン画面 %>
-  <div class="col-7 p-0 bg-eee"> 
+  <div class="col-7 p-0 bg-eee text-black-50 d-flex align-items-center">
+    <h2>
     ここにコメントが表示されます
+    </h2>
   </div>
 </div>
