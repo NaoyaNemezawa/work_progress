@@ -1,6 +1,6 @@
 <div class="col-7 p-0 bg-eee"> 
   <% if comments %>
-    <%= form_with model: @comment,url:project_task_comments_path(project.id,task.id), class:"h50px d-flex", local: true do |f| %>
+    <%= form_with model: newcomment, url:project_task_comments_path(project.id,task.id), class:"h50px d-flex", local: true do |f| %>
       <%= f.text_field :comment, class:"h-75 w-75 mx-2 outline align-self-center", placeholder:"コメント" %>
       <%= f.submit "コメントする", class:"h-75 align-self-center" %>
     <% end %>

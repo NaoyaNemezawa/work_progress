@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
   before_action :find_data
+  before_action :new_data, only:[:index,:create]
   def index
     @comment = Comment.new
+    @user_project = UserProject.new
   end
 
   def create
@@ -25,11 +27,14 @@ class CommentsController < ApplicationController
   end
 
   def find_data
-    @newproject = Project.new
     @project = Project.find(params[:project_id])
     @tasks = @project.tasks
     @task = Task.find(params[:task_id])
     @comments = @task.comments.includes(:user)
+  end
+
+  def new_data
+    @newproject = Project.new
     @newtask = Task.new
   end
 
