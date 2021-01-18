@@ -1,5 +1,0 @@
-<h2>タスク編集画面</h2>
-<%= form_with model: @task, url: project_task_path(@project.id,@task.id), local: true do |f| %>
-  <%= render partial: "from", locals: {f: f} %>
-<% end %>
-<%= link_to "戻る",project_path(@project.id) %>
