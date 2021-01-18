@@ -48,7 +48,7 @@
             <%= comment.comment %>
           </div>
           <div>
-            <p class="mb-1 f-size12 text-right text-black-50"><%= comment.updated_at%></p>
+            <p class="mb-1 f-size12 text-right text-black-50"><%= "最終更新#{comment.updated_at.strftime("%Y-%m-%d %H:%M")}"%></p>
           </div>
         </div>
       <% end %>
