@@ -6,6 +6,10 @@
   height: calc(100vh - 40px);
 }
 
+.mh70px{
+  max-height: 70px;
+}
+
 .f-size12{
   font-size: 12px;
 }

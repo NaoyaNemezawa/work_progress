@@ -34,15 +34,21 @@
       </div>
     </div>
     <%# コメント一覧 %>
-    <div class="overflow-auto">
+    <div class="overflow-auto w-100">
       <% @comments.each do |comment| %>
-        <div class="d-flex justify-content-between py-1 m-2">
-          <a href="#" class="text-reset py-2 my-auto mx-1">
-          <%= comment.comment %></a>
-          <div class="d-flex align-items-center px-2">
-            <a href="#" class="f-size12 text-reset p-1 mx-1">
-            編集</a>
-            <%=link_to "削除",project_task_comment_path(@project.id,@task.id,comment.id),method: :delete, class: "f-size12 text-reset p-1 mx-1" %>
+        <div class="bg-white m-2">
+          <div class="d-flex justify-content-between">
+            <p class="mb-1 mx-3"><%= comment.user.name%></p>
+            <div class="f-size12">
+              <%= link_to "編集", "#", class:"mr-3" %>
+              <%= link_to "削除", "#", class:"mr-3" %>
+            </div>
+          </div>
+          <div class="overflow-auto mh70px mx-2">
+            <%= comment.comment %>
+          </div>
+          <div>
+            <p class="mb-1 f-size12 text-right text-black-50"><%= comment.updated_at%></p>
           </div>
         </div>
       <% end %>
