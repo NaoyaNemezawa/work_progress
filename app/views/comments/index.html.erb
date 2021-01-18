@@ -7,13 +7,34 @@
   <%= render "projects/middle_ber", project: @project, tasks: @tasks %>
   <%# コメント画面 %>
   <div class="col-7 p-0 bg-eee"> 
-    <%= form_with model: @comment, url:project_task_comments_path(@project.id,@task.id), class:"h50px d-flex", local: true do |f| %>
-      <%= f.text_field :comment, class:"h-75 w-75 mx-2 outline align-self-center", placeholder:"コメント" %>
-      <%= f.submit "コメントする", class:"h-75 align-self-center" %>
-    <% end %>
+    <div class="mx-2 my-1 border bg-white d-flex justify-content-between">
+      <div class="w-75">
+        <div class="m-1"><%= @task.name %></div><%# タスク名 %>
+        <div class="h50px m-1 overflow-auto"><%= @task.specifics %></div><%# タスク詳細 %>
+      </div>
+      <div class="d-flex flex-column justify-content-around w-25">
+      <%# タスク用ドロップボタン %>
+      <div class="align-self-center mx-auto doropdown bg-secondary text-light w-75 text-center">
+        <div class="dropdown cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+          編集
+        </div>
+        <div class="dropdown-menu dropdown-menu-right">
+          <div class="dropdown-item cursor-pointer f-size14 px-1" data-toggle="modal" data-target="#modal11">
+            タスク名を変更する
+          </div>
+          <div class="dropdown-item cursor-pointer f-size14 px-1" data-toggle="modal" data-target="#modal14">
+            タスクを削除する
+          </div>
+        </div>
+      </div>
+      <%# ドロップボタンここまで %>
+      <div class="cursor-pointer f-size14 mx-auto p-1 bg-primary text-light w-75 text-center" data-toggle="modal" data-target="#modal100">
+        コメント追加
+      </div>
+      </div>
+    </div>
     <div class="overflow-auto">
     <%# タスクの詳細とコメント一覧 %>
-      <p class="overflow-x white-space"><%= @task.specifics %></p>
       <% @comments.each do |comment| %>
         <div class="d-flex justify-content-between py-1 m-2">
           <a href="#" class="text-reset py-2 my-auto mx-1">
@@ -28,4 +49,55 @@
     </div>
   </div>
   <%# コメント画面ここまで %>
+</div>
+
+<%# モーダル %>
+<%# タスク編集用 %>
+<div class="modal fade" id="modal11">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="text-center">
+        <div class="border-bottom my-2 pb-1">
+          <%= @task.name %>を変更します。
+        </div>
+        <%= form_with model: @task, url:project_task_path(@project.id,@task.id), local: true do |f| %>
+          <%= f.text_field :name, class: "outline w-90 my-1", placeholder:"タスクネーム"%>
+          <%= f.text_area :specifics, class: "outline w-90 my-1", placeholder:"タスク詳細（任意）"%>
+          <%= f.submit "編集する",class:"my-1" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%# タスク削除用 %>
+<div class="modal fade" id="modal14">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="text-center border-bottom my-2 text-danger">
+        <p class="mb-1">タスク：<%= @task.name %>を削除します。</p>
+        <p class="mb-1">本当によろしいですか。</p>
+      </div>
+      <div class="d-flex justify-content-center mb-2">
+        <%= link_to "削除する", project_task_path(@project.id,@task.id), method: :delete, class:"bg-danger text-white px-2 mr-4 cursor-pointer" %>
+        <div class="bg-secondary text-white ml-4 cursor-pointer" data-dismiss="modal">
+        キャンセル</div>
+      </div>
+    </div>
+  </div>
+</div>
+<%# コメント追加用 %>
+<div class="modal fade" id="modal100">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="text-center">
+        <div class="border-bottom my-2 pb-1">
+          新しいコメントを追加します。
+        </div>
+        <%= form_with model: @comment, url:project_task_comments_path(@project.id,@task.id), local: true do |f| %>
+          <%= f.text_area :comment, class: "outline w-90 my-1", placeholder:"進捗状況などを記入してください。"%>
+          <%= f.submit "コメント追加",class:"my-1" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
