@@ -23,6 +23,15 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def update
+    @project = Project.find(params[:id])
+    if @project.update(project_params)
+      redirect_to root_path
+    else
+      render :index
+    end
+  end
+
   def destroy
     @project = Project.find(params[:id])
     @project.destroy

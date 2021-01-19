@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to index_tasks
     else
-      render :edit
+      render :index
     end
   end
 

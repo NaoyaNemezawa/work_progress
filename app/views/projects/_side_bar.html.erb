@@ -28,7 +28,6 @@
   <% current_user.projects.each do |project| %>
     <div class="d-flex justify-content-between py-2">
       <%= link_to project.name, project_tasks_path(project.id), class: "text-reset align-text-center py-1 my-auto mx-1 f-size1vw" %>
-      <%= link_to "削除", project_path(project.id),method: :delete, class: "text-reset align-text-center py-1 my-auto mx-1 f-size1vw" %>
     </div>
   <% end %>
   </div>
