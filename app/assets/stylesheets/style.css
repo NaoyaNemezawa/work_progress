@@ -22,10 +22,6 @@ li{
   list-style: none;
 }
 
-.overflow-x{
-  overflow-x: auto;
-}
-
 .white-space{
   white-space: nowrap;
 }
@@ -95,12 +91,6 @@ li{
 
 .bg-eee{
   background-color: #EEE;
-}
-
-.overflow-y{
-  overflow-y: auto;
-  max-height: 300px;
-  background: rgba(255, 255, 255, 0.5);
 }
 
 .f-size1vw{

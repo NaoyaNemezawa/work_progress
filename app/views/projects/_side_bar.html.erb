@@ -2,33 +2,46 @@
 <div class="col-2 p-0 bg-secondary text-white">
   <div class="d-flex my-1" >
     <p class="my-auto mr-2 f-size14">プロジェクト一覧</p>
-    <%# ドロップダウン %>
-    <div class="dropdown">
-      <div class="dropdown f-size12 cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        追加
-      </div>
-      <div class="dropdown-menu overflow-y" aria-labelledby="dropdown1">
-        <%= form_with model: @newproject, local: true do |f| %>
-          <div class="f-size14">新プロジェクト名</div>
-          <%= f.text_field :name, class:"outline", placeholder: "プロジェクト名" %><br/>
-          <div class="f-size14">メンバーのメールアドレス（任意）</div>
-          <div class ="form my-1" id = "form[0]">
-            <input class="outline" name="project[emails][]" id = "input" placeholder="メンバーのemail">
-          </div>
-          <span class="border width-150 text-center cursor-pointer my-2" id="add_btn">入力欄を追加</span><br/>
-          <span class="border width-150 text-center cursor-pointer d-none my-2" id="close_btn">入力欄を削除</span><br/>
-          <input name="project[user_ids][]" type="hidden" value=<%= current_user.id%> >
-          <%= f.submit "プロジェクト作成", class:"bg-primary text-white my-2 rounded border-0" %>
-        <% end %>
-      </div>
+    <%# プロジェクト追加ボタン %>
+    <div class="border f-size12 cursor-pointer" data-toggle="modal" data-target="#modal1">
+      追加
     </div>
-      <%# ドロップダウンここまで %>
   </div>
+  <%# プロジェクト一覧 %>
   <div class="overflow-auto vh100-80px">
   <% current_user.projects.each do |project| %>
     <div class="d-flex justify-content-between py-2">
       <%= link_to project.name, project_tasks_path(project.id), class: "text-reset align-text-center py-1 my-auto mx-1 f-size1vw" %>
     </div>
   <% end %>
+  </div>
+</div>
+
+<%# モーダル %>
+<%# まだドロップダウンのまま %>
+<div class="modal fade overflow-auto" id="modal1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="text-center my-1">
+        新しいプロジェクトを立ち上げます
+      </div>
+        <%= form_with model: @newproject, class:"text-center", local: true do |f| %>
+          <%= f.text_field :name, class:"outline w-75 my-1", placeholder: "プロジェクト名" %><br/>
+          <%# <div> %>
+          メンバーのメールアドレス（任意）
+          <%# </div> %>
+          <div class ="form my-1" id = "form[0]">
+            <input class="outline w-75" name="project[emails][]" id = "input" placeholder="メンバーのemail">
+          </div>
+          <span class="border width-150 text-center cursor-pointer m-2" id="add_btn">入力欄を追加</span>
+          <span class="border width-150 text-center cursor-pointer d-none m-2" id="close_btn">入力欄を削除</span><br />
+          <input name="project[user_ids][]" type="hidden" value=<%= current_user.id%> >
+          <div class="d-flex justify-content-center my-2">
+            <%= f.submit "プロジェクト作成"%>
+            <div class="btn-sm bg-secondary text-white ml-4 cursor-pointer" data-dismiss="modal">
+            キャンセル</div>
+          </div>
+        <% end %>
+    </div>
   </div>
 </div>

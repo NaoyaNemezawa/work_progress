@@ -1,7 +1,7 @@
 <div class="col-3 p-0 bg-darkgray text-white">
   <div class="bg-white text-dark border m-2">
     <div class="d-flex justify-content-between">
-      <div class="ml-1"><%= project.name %></div>
+      <div class="ml-1 w-75"><%= project.name %></div>
       <%# 編集ボタン %>
       <div class="dropdown">
         <div class="mr-1 dropdown cursor-pointer btn-sm btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,7 +25,7 @@
     <div class="h50px">
       <div class="d-flex f-size14">
         <%= "メンバー#{project.users.count}人" %>
-        <ul class="d-flex overflow-x w-50 white-space p-0 m-0">
+        <ul class="d-flex overflow-auto w-50 white-space p-0 m-0">
           <li class="mx-1 f-size12 ">
           <%= project.users.map(&:name).join("") %></li>
         </ul>
