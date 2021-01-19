@@ -1,8 +1,8 @@
 <div class="col-3 p-0 bg-darkgray text-white">
-  <div class="bg-succsess border m-2">
-    <%# メンバー一覧 %>
+  <div class="bg-white text-dark border m-2">
     <div class="d-flex justify-content-between">
       <div class="ml-1"><%= project.name %></div>
+      <%# 編集ボタン %>
       <div class="dropdown">
         <div class="mr-1 dropdown cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           編集
@@ -20,7 +20,9 @@
         </div>
       </div>
     </div>
-    <div class="h50px d-flex flex-column justify-content-between">
+    <%# 編集ボタンここまで %>
+    <%# メンバー一覧 %>
+    <div class="h50px">
       <div class="d-flex f-size14">
         <%= "メンバー#{project.users.count}人" %>
         <ul class="d-flex overflow-x w-50 white-space p-0 m-0">
@@ -29,32 +31,20 @@
         </ul>
       </div>
       <%# メンバー一覧ここまで %>
-      <%# タスク追加欄 %>
-      <div class="dropdown">
-        <div class="dropdown corsor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          タスク追加
-        </div>
-        <div class="dropdown-menu">
-          新しいタスクを作成します
-          <%= form_with model: @newtask, url: project_tasks_path(project.id), local: true do |f| %>
-           <%= f.text_field :name, class: "outline mb-2", placeholder:"タスクネーム" %>
-           <%= f.text_area :specifics, class:"outline", placeholder:"タスク詳細" %>
-           <%= f.submit "タスク作成" %>
-          <% end %>
-        </div>
+      <span class="btn-sm btn-primary cursor-pointer ml-1" data-toggle="modal" data-target="#modal10">
+        タスク追加
+      </span>
+    </div>
+  </div>
+  <%# タスク一覧表示 %>
+  <div class="overflow-auto">
+    <% tasks.each do |task| %>
+      <div class="d-flex justify-content-between py-1 m-2">
+        <%= link_to task.name, project_task_comments_path(project.id,task.id), class: "text-reset py-2 my-auto mx-1" %>
       </div>
-    </div>
-    <%# タスク追加欄ここまで %>
-    </div>
-    <%# タスク一覧 %>
-    <div class="overflow-auto">
-      <% tasks.each do |task| %>
-        <div class="d-flex justify-content-between py-1 m-2">
-          <%= link_to task.name, project_task_comments_path(project.id,task.id), class: "text-reset py-2 my-auto mx-1" %>
-        </div>
-      <% end %>
-    </div>
-    <%# タスク一覧ここまで %>
+    <% end %>
+  </div>
+  <%# タスク一覧ここまで %>
 </div>
 
 <%# モーダル %>
@@ -105,6 +95,26 @@
         <%= f.text_field :email, placeholder:"追加メンバーのemail", class:"w-90" %>
         <div class="d-flex justify-content-center my-2">
           <%= f.submit "招待" %>
+          <div class="btn-sm bg-secondary text-white ml-4 cursor-pointer" data-dismiss="modal">
+          キャンセル</div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%# タスク追加 %>
+<div class="modal fade" id="modal10">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="text-center my-2">
+        新しいタスクを作成します
+      </div>
+      <%= form_with model: @newtask, url: project_tasks_path(project.id), class:"text-center", local: true do |f| %>
+        <%= f.text_field :name, class: "outline mb-2 w-90", placeholder:"タスクネーム" %>
+        <%= f.text_area :specifics, class:"outline w-90", placeholder:"タスクの詳細" %>
+        <div class="d-flex justify-content-center my-2">
+          <%= f.submit "タスク作成" %>
           <div class="btn-sm bg-secondary text-white ml-4 cursor-pointer" data-dismiss="modal">
           キャンセル</div>
         </div>
