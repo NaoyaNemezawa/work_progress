@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :projects, only:[:index,:create,:update,:destroy] do
     resources :user_projects, only:[:create]
     resources :tasks, only:[:index,:create,:update,:destroy] do
-      resources :comments, only:[:index,:create,:destroy]
+      resources :comments, only:[:index,:create,:update,:destroy]
     end
   end
 end
