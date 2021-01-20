@@ -19,16 +19,16 @@
             編集
           </div>
           <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-item cursor-pointer f-size14 px-1" data-toggle="modal" data-target="#modal11">
+            <div class="dropdown-item cursor-pointer f-size14 px-1" data-toggle="modal" data-target="#modal_t2">
               タスク名を変更する
             </div>
-            <div class="dropdown-item cursor-pointer f-size14 px-1" data-toggle="modal" data-target="#modal14">
+            <div class="dropdown-item cursor-pointer f-size14 px-1" data-toggle="modal" data-target="#modal_t4">
               タスクを削除する
             </div>
           </div>
         </div>
         <%# ドロップボタンここまで %>
-        <div class="cursor-pointer f-size14 mx-auto p-1 btn-sm btn-primary text-light w-75 text-center" data-toggle="modal" data-target="#modal100">
+        <div class="cursor-pointer f-size14 mx-auto p-1 btn-sm btn-primary text-light w-75 text-center" data-toggle="modal" data-target="#modal_c1">
           コメント追加
         </div>
       </div>
@@ -40,8 +40,8 @@
           <div class="d-flex justify-content-between">
             <p class="mb-1 mx-3"><%= comment.user.name%></p>
             <div class="f-size12">
-              <%= link_to "編集", "#", class:"mr-3" %>
-              <%= link_to "削除", "#", class:"mr-3" %>
+              <span class="mr-3 " data-toggle="modal" data-target="#modal_ce<%= comment.id %>" >編集</span>
+              <%= link_to "削除", project_task_comment_path(@project.id,@task.id,comment.id),method: :delete, class:"mr-3", data: { confirm: "削除しますか？" } %>
             </div>
           </div>
           <div class="overflow-auto mh70px mx-2">
@@ -51,6 +51,27 @@
             <p class="mb-1 f-size12 text-right text-black-50"><%= "最終更新#{comment.updated_at.strftime("%Y-%m-%d %H:%M")}"%></p>
           </div>
         </div>
+        <%# コメント編集用 %>
+            <div class="modal fade" id="modal_ce<%= comment.id %>">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="text-center">
+                    <div class="border-bottom my-2 pb-1">
+                      <%= comment.comment %>を変更します。
+                    </div>
+                    <%= form_with model: @comment, url:project_task_comment_path(@project.id,@task.id,comment.id),method: :patch, local: true do |f| %>
+                      <%= f.text_area :comment, class: "outline w-75 my-1",value: comment.comment, placeholder:"コメント内容"%>
+                      <div class="d-flex justify-content-center my-2">
+                        <%= f.submit "編集する" %>
+                        <div class="btn-sm btn-secondary ml-4 cursor-pointer" data-dismiss="modal">
+                        キャンセル</div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%# ここまで %>
       <% end %>
     </div>
   </div>
@@ -59,7 +80,7 @@
 
 <%# モーダル %>
 <%# タスク編集用 %>
-<div class="modal fade" id="modal11">
+<div class="modal fade" id="modal_t2">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="text-center">
@@ -80,7 +101,7 @@
   </div>
 </div>
 <%# タスク削除用 %>
-<div class="modal fade" id="modal14">
+<div class="modal fade" id="modal_t4">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="text-center border-bottom my-2 text-danger">
@@ -96,7 +117,7 @@
   </div>
 </div>
 <%# コメント追加用 %>
-<div class="modal fade" id="modal100">
+<div class="modal fade" id="modal_c1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="text-center">
