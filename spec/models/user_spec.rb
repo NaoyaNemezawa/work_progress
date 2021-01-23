@@ -35,7 +35,6 @@ RSpec.describe User, type: :model do
         user2 = FactoryBot.build(:user)
         user2.email = @user.email
         user2.valid?
-        # binding.pry
         expect(user2.errors.full_messages).to include("Email has already been taken")
       end
 
