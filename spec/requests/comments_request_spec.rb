@@ -16,7 +16,7 @@ RSpec.describe CommentsController, type: :request do
         expect(response.status).to eq 200
       end
   
-      it "indexアクションにリクエストするとレスポンスにタスク名が含まれる" do
+      it "indexアクションにリクエストするとレスポンスにコメントが含まれる" do
         @comment2 = Comment.create(comment: "テスト", task_id: @task.id, user_id: @user.id)
         # 何故かテスト通らないので@comment2として作成。余裕あれば原因調査
         get project_task_comments_path(@project.id,@task.id)
