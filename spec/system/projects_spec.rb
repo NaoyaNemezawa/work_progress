@@ -79,32 +79,24 @@ RSpec.describe "プロジェクトの編集", type: :system do
   end
   context "プロジェクトの編集ができるとき" do
     it "プロジェクトを作成したユーザーはプロジェクトの編集ができる" do
-      # ログインしてプロジェクトの新規作成をする
+      # ログインしてプロジェクト編集画面を確認
       sign_in(@user)
-      find('div[data-target="#modal_p1"]').click
-      fill_in "project[name]", with: @project_name
-      find('input[name="commit"]').click
-      # プロジェクト編集画面の表示確認
-      click_on @project_name
+      click_on "テスト用プロジェクト"
       find('div[id="dropdownproject"]').click
       find('div[data-target="#modal_p2"]').click
-      expect(page).to have_content "#{@project_name}を変更します"
+      expect(page).to have_content "テスト用プロジェクトを変更します"
       # 編集画面に既存のプロジェクト名が入力されていることの確認
-      expect(find('input[name="project[name]"]').value).to eq @project_name
+      expect(find('input[name="project[name]"]').value).to eq "テスト用プロジェクト"
       # プロジェクト名を編集してもプロジェクトテーブルのカウントは増えない
-      fill_in "project[name]", with: "プロジェクト名の編集"
+      fill_in "project[name]", with: "テスト用プロジェクトを編集"
       expect{find('input[name="commit"]').click}.to change{Project.count}.by(0)
       # トップページに新しいプロジェクト名が表示される
       expect(current_path).to eq root_path
-      expect(page).to have_content "#{@project_name}プロジェクト名の編集"
+      expect(page).to have_content "テスト用プロジェクトを編集"
     end
 
     it "招待したメンバーはプロジェクトの編集ができる" do
       # ログインしてプロジェクトの新規作成をする
-      sign_in(@user)
-      find('div[data-target="#modal_p1"]').click
-      fill_in "project[name]", with: @project_name
-      find('input[name="commit"]').click
       # ログアウト
     end
   end
