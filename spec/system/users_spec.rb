@@ -1,5 +1,5 @@
 require 'rails_helper'
-# binding.pry 入力用
+
 RSpec.describe "ユーザー新規登録", type: :system do
   before do
     @user=FactoryBot.build(:user)
