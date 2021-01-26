@@ -129,3 +129,61 @@ RSpec.describe "プロジェクトの編集", type: :system do
     end
   end
 end
+
+RSpec.describe "プロジェクトの削除", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @project = FactoryBot.create(:project)
+    # 中間テーブルを介して紐付け。もっと良い方法が見つかるまではベタ打ち
+    UserProject.create(user_id:@user.id, project_id:@project.id)
+  end
+  context "プロジェクトを削除できるとき" do
+    it "プロジェクト作成者はプロジェクトの削除ができる" do
+      # サインインしてプロジェクト編集欄を表示する
+      sign_in(@user)
+      click_on @project.name
+      find('div[id="dropdownproject"]').click
+      find('div[data-target="#modal_p4"]').click
+      # 削除前の確認表示
+      expect(page).to have_content "#{@project.name}を削除します。"
+      # 削除ボタンを押すとプロジェクトテーブルのカウントが１下がる
+      expect{find_link("削除する").click}.to change{Project.count}.by(-1)
+      # トップページに遷移し、プロジェクト一覧に表示されなくなる
+      expect(current_path).to eq root_path
+      expect(page).to have_no_link @project.name
+    end
+    it "メンバーはプロジェクトを削除できる" do
+      # 紐付け
+      user2 = FactoryBot.create(:user)
+      UserProject.create(user_id:user2.id, project_id:@project.id)
+      # ログインしてプロジェクト削除確認の表示
+      sign_in(user2)
+      click_on @project.name
+      find('div[id="dropdownproject"]').click
+      find('div[data-target="#modal_p4"]').click
+      expect(page).to have_content "#{@project.name}を削除します。"
+      # 削除ボタンを押すとプロジェクトテーブルのカウントが１下がる
+      expect{find_link("削除する").click}.to change{Project.count}.by(-1)
+      # トップページに遷移し、プロジェクト一覧に表示されなくなる
+      expect(current_path).to eq root_path
+      expect(page).to have_no_link @project.name
+    end
+  end
+
+  context "プロジェクトを削除できないとき" do
+    it "ログインしていないとプロジェクトの削除ができない" do
+      # ログインせずにURLを直接入力するとログインページへ遷移する
+      visit project_tasks_path(@project.id)
+      expect(current_path).to eq new_user_session_path
+    end
+    it "招待されていないユーザーはプロジェクトの削除ができない" do
+      user2 = FactoryBot.create(:user)
+      sign_in(user2)
+      # 招待されていないユーザーはプロジェクトのリンクが存在しない
+      expect(page).to have_no_link @project.name
+      pending "要対策。URLを直接入力するとインデックスへ遷移する"
+      visit project_tasks_path(@project.id)
+      expect(current_path).to eq root_path
+    end
+  end
+end
