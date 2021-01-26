@@ -40,7 +40,7 @@ RSpec.describe "タスクの作成", type: :system do
       sign_in(user2)
       # 招待されていないユーザーはプロジェクトのリンクが存在しない
       expect(page).to have_no_link @project.name
-      pending "要対策。URLを直接入力するとインデックスへ遷移する"
+      # 招待されていないユーザーがURLを直接入力するとトップページへ遷移する
       visit project_tasks_path(@project.id)
       expect(current_path).to eq root_path
     end
@@ -91,7 +91,7 @@ RSpec.describe "タスクの編集", type: :system do
       sign_in(user2)
       # 招待されていないユーザーはプロジェクトのリンクが存在しない
       expect(page).to have_no_link @project.name
-      pending "要対策。URLを直接入力するとインデックスへ遷移する"
+      # 招待されていないユーザーがURLを直接入力するとトップページへ遷移する
       visit project_tasks_path(@project.id)
       expect(current_path).to eq root_path
     end
@@ -134,7 +134,7 @@ RSpec.describe "タスクの削除", type: :system do
       sign_in(user2)
       # 招待されていないユーザーはプロジェクトのリンクが存在しない
       expect(page).to have_no_link @project.name
-      pending "要対策。URLを直接入力するとインデックスへ遷移する"
+      # 招待されていないユーザーがURLを直接入力するとトップページへ遷移する
       visit project_tasks_path(@project.id)
       expect(current_path).to eq root_path
     end
