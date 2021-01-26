@@ -97,4 +97,46 @@ RSpec.describe "タスクの編集", type: :system do
     end
   end
 end
-# binding.pry
+
+RSpec.describe "タスクの削除", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @project = FactoryBot.create(:project)
+    UserProject.create(user_id:@user.id, project_id:@project.id)
+    Task.create(name:"テスト用タスク",specifics:"テスト用タスク詳細",project_id:@project.id)
+    @task = Task.find_by(project_id:@project.id)
+  end
+  context "タスクの削除ができるとき" do
+    it "プロジェクトのメンバーはタスクの削除ができる" do
+      # ログインしてコメント一覧画面を表示
+      sign_in(@user)
+      click_on @project.name
+      click_on @task.name
+      # タスク編集削除画面の表示を確認する
+      find('div[id="dropdowntask"]').click
+      find('div[data-target="#modal_t4"]').click
+      expect(page).to have_content "#{@task.name}を削除します"
+      # タスクを削除するとプロジェクトテーブルのカウントが１減る
+      expect{find_link("削除する").click}.to change{Task.count}.by(-1)
+      # タスク一覧に削除したタスク名がされない
+      expect(current_path).to eq project_tasks_path(@project.id)
+      expect(page).to have_no_link "テスト用タスクを編集"
+    end
+  end
+  context "タスクの削除ができないとき" do
+    it "ログインしていないとタスクを削除ができない" do
+      # ログインせずにURLを直接入力するとログインページへ遷移する
+      visit project_tasks_path(@project.id)
+      expect(current_path).to eq new_user_session_path
+    end
+    it "プロジェクトメンバー以外のユーザーはタスクを削除できない" do
+      user2 = FactoryBot.create(:user)
+      sign_in(user2)
+      # 招待されていないユーザーはプロジェクトのリンクが存在しない
+      expect(page).to have_no_link @project.name
+      pending "要対策。URLを直接入力するとインデックスへ遷移する"
+      visit project_tasks_path(@project.id)
+      expect(current_path).to eq root_path
+    end
+  end
+end
