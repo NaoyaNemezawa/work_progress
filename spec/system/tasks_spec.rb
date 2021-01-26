@@ -46,4 +46,55 @@ RSpec.describe "タスクの作成", type: :system do
     end
   end
 end
+
+RSpec.describe "タスクの編集", type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+    @project = FactoryBot.create(:project)
+    UserProject.create(user_id:@user.id, project_id:@project.id)
+    Task.create(name:"テスト用タスク",specifics:"テスト用タスク詳細",project_id:@project.id)
+    @task = Task.find_by(project_id:@project.id)
+  end
+  context "タスクの編集ができるとき" do
+    it "プロジェクトのメンバーはタスクの編集ができる" do
+      # ログインしてコメント一覧画面を表示
+      sign_in(@user)
+      click_on @project.name
+      click_on @task.name
+      # タスク編集画面の表示を確認する
+      find('div[id="dropdowntask"]').click
+      find('div[data-target="#modal_t2"]').click
+      expect(page).to have_content "#{@task.name}を変更します"
+      # 編集画面に既存のタスク名とタスク詳細が入力されていることの確認
+      expect(find('input[name="task[name]"]').value).to eq @task.name
+      expect(find('textarea[name="task[specifics]"]').value).to eq @task.specifics
+      # タスクを編集してもプロジェクトテーブルのカウントは増えない
+      fill_in "task[name]", with: "テスト用タスクを編集"
+      fill_in "task[specifics]", with: "テスト用タスク詳細を編集"
+      expect{find_button("編集する").click}.to change{Task.count}.by(0)
+      # タスク一覧に新しいタスク名が表示される
+      expect(current_path).to eq project_tasks_path(@project.id)
+      expect(page).to have_content "テスト用タスクを編集"
+      # コメント一覧画面に新しいタスクの詳細が表示されている
+      click_on @task.name
+      expect(page).to have_content "テスト用タスク詳細を編集"
+    end
+  end
+  context "タスクの編集ができないとき" do
+    it "ログインしていないとタスクを編集できない" do
+      # ログインせずにURLを直接入力するとログインページへ遷移する
+      visit project_tasks_path(@project.id)
+      expect(current_path).to eq new_user_session_path
+    end
+    it "プロジェクトメンバー以外のユーザーはタスクを編集できない" do
+      user2 = FactoryBot.create(:user)
+      sign_in(user2)
+      # 招待されていないユーザーはプロジェクトのリンクが存在しない
+      expect(page).to have_no_link @project.name
+      pending "要対策。URLを直接入力するとインデックスへ遷移する"
+      visit project_tasks_path(@project.id)
+      expect(current_path).to eq root_path
+    end
+  end
+end
 # binding.pry
