@@ -15,7 +15,7 @@
       <div class="d-flex flex-column justify-content-around w-25">
         <%# タスク用ドロップボタン %>
         <div class="align-self-center mx-auto doropdown btn-sm btn-secondary text-light w-75 text-center">
-          <div class="dropdown cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+          <div class="dropdown cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdowntask"> 
             編集
           </div>
           <div class="dropdown-menu dropdown-menu-right">
@@ -36,12 +36,12 @@
     <%# コメント一覧 %>
     <div class="overflow-auto w-100">
       <% @comments.each do |comment| %>
-        <div class="bg-white m-2">
+        <div class="bg-white m-2" id="comment<%= comment.id %>">
           <div class="d-flex justify-content-between">
             <p class="mb-1 mx-3"><%= comment.user.name%></p>
             <div class="f-size12">
-              <span class="mr-3 cursor-pointer" data-toggle="modal" data-target="#modal_ce<%= comment.id %>" >編集</span>
-              <span class="mr-3 cursor-pointer" data-toggle="modal" data-target="#modal_cd<%= comment.id %>">削除</span>
+              <span class="mr-3 cursor-pointer" data-toggle="modal" data-target="#modal_ce<%= comment.id %>" id="ce<%= comment.id %>" >編集</span>
+              <span class="mr-3 cursor-pointer" data-toggle="modal" data-target="#modal_cd<%= comment.id %>" id="cd<%= comment.id %>">削除</span>
             </div>
           </div>
           <div class="overflow-auto mh70px mx-2">

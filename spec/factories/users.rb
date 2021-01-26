@@ -5,8 +5,10 @@ FactoryBot.define do
     password {Faker::Internet.password(min_length: 6)}
     password_confirmation {password}
 
-    after(:create) do |user|
-      create(:user_project, user: user, project: create(:project))
+    trait :user_with_projects do
+      after(:build) do |user|
+        user.projects << build(:project)
+      end
     end
   end
 end
