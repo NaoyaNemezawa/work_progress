@@ -36,12 +36,12 @@
     <%# コメント一覧 %>
     <div class="overflow-auto w-100">
       <% @comments.each do |comment| %>
-        <div class="bg-white m-2">
+        <div class="bg-white m-2" id="comment<%= comment.id %>">
           <div class="d-flex justify-content-between">
             <p class="mb-1 mx-3"><%= comment.user.name%></p>
             <div class="f-size12">
-              <span class="mr-3 cursor-pointer" data-toggle="modal" data-target="#modal_ce<%= comment.id %>" >編集</span>
-              <span class="mr-3 cursor-pointer" data-toggle="modal" data-target="#modal_cd<%= comment.id %>">削除</span>
+              <span class="mr-3 cursor-pointer" data-toggle="modal" data-target="#modal_ce<%= comment.id %>" id="ce<%= comment.id %>" >編集</span>
+              <span class="mr-3 cursor-pointer" data-toggle="modal" data-target="#modal_cd<%= comment.id %>" id="cd<%= comment.id %>">削除</span>
             </div>
           </div>
           <div class="overflow-auto mh70px mx-2">
