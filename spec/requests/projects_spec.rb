@@ -15,7 +15,6 @@ RSpec.describe ProjectsController, type: :request do
 
       it "indexアクションにリクエストするとレスポンスに作成済みのプロジェクト名が帰ってくる" do
         get root_path
-        binding.pry
         expect(response.body).to include @project.name
       end
     end
