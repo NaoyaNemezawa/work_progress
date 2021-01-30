@@ -36,7 +36,7 @@ RSpec.describe "コメント作成機能", type: :system do
       sign_in(user2)
       # 招待されていないユーザーはプロジェクトのリンクが存在しない
       expect(page).to have_no_link @project.name
-      pending "要対策。URLを直接入力するとインデックスへ遷移する"
+      # 招待されていないユーザーがURLを直接入力するとトップページへ遷移する
       visit project_task_comments_path(@project.id, @task.id)
       expect(current_path).to eq root_path
     end
@@ -86,7 +86,7 @@ RSpec.describe "コメント編集機能", type: :system do
       click_on @task.name
       # コメント表示の確認
       expect(page).to have_content @comment.comment
-      pending "要対策。編集ボタンの非表示"
+      # コメントを投稿したユーザー以外は編集ボタンが表示されないことの確認
       within "#comment#{@comment.id}" do
         expect(page).to have_no_content("編集")
       end
@@ -136,7 +136,7 @@ RSpec.describe "コメント削除機能", type: :system do
       click_on @task.name
       # コメント表示の確認
       expect(page).to have_content @comment.comment
-      pending "要対策。編集ボタンの非表示"
+      # コメントを投稿したユーザーでない場合、削除ボタンが表示されないことの確認
       within "#comment#{@comment.id}" do
         expect(page).to have_no_content("削除")
       end

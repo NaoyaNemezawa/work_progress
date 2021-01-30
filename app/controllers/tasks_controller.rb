@@ -2,8 +2,13 @@ class TasksController < ApplicationController
   before_action :find_data, only:[:index,:create]
 
   def index
-    @user_project = UserProject.new
-    @newtask = Task.new
+    userproject = UserProject.where(project_id:params[:project_id])
+    if userproject.map{|id| id[:user_id]}.include?(current_user.id)
+      @user_project = UserProject.new
+      @newtask = Task.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create

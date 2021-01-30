@@ -2,8 +2,13 @@ class CommentsController < ApplicationController
   before_action :find_data
   before_action :new_data, only:[:index,:create]
   def index
-    @comment = Comment.new
-    @user_project = UserProject.new
+    userproject = UserProject.where(project_id:params[:project_id])
+    if userproject.map{|id| id[:user_id]}.include?(current_user.id)
+      @comment = Comment.new
+      @user_project = UserProject.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
