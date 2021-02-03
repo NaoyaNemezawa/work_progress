@@ -62,7 +62,7 @@ http://www.workprogres.net/
 テスト用アカウントでログインした後、プロジェクトを追加します。プロジェクト内にタスクを設定した後、タスク内にコメントを投稿できます。プロジェクトには登録済みの別ユーザーの招待することで情報の共有を行えます。招待するにはプロジェクト作成画面かユーザー招待画面において、招待したいユーザーのメールアドレスを入力する必要があります。
 
 ## DB設計図
-![DBseting](https://user-images.githubusercontent.com/71652340/106731215-94849380-6652-11eb-880d-168f98fba8dd.png)
+![DBseting２](https://user-images.githubusercontent.com/71652340/106731951-75d2cc80-6653-11eb-9abb-6c1bbeb6901d.png)
 
 
 ## Usersテーブル
