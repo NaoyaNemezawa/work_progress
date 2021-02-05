@@ -61,6 +61,34 @@ http://www.workprogres.net/
 ### アプリの利用方法
 テスト用アカウントでログインした後、プロジェクトを追加します。プロジェクト内にタスクを設定した後、タスク内にコメントを投稿できます。プロジェクトには登録済みの別ユーザーの招待することで情報の共有を行えます。招待するにはプロジェクト作成画面かユーザー招待画面において、招待したいユーザーのメールアドレスを入力する必要があります。
 
+## 使用技術（開発環境）
+### バックエンド
+Ruby, Ruby on Rails
+
+### フロントエンド
+HTML, CSS, JavaScript, Bootstrap
+
+### データベース
+MySQL
+
+### インフラ
+AWS(EC2, Route53), Capistrano
+
+### webサーバー
+Nginx
+
+### アプリケーションサーバー
+unicorn
+
+### ソース管理
+git, GitHub, GitHubDesktop
+
+### テスト
+RSpec
+
+### エディダ
+VSCode
+
 ## DB設計図
 ![DBseting２](https://user-images.githubusercontent.com/71652340/106731951-75d2cc80-6653-11eb-9abb-6c1bbeb6901d.png)
 
