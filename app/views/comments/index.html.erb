@@ -48,6 +48,9 @@
           </div>
           <div class="overflow-auto mh70px mx-2">
             <%= comment.comment %>
+            
+            <%= image_tag comment.img.to_s  %>
+            
           </div>
           <div>
             <p class="mb-1 f-size12 text-right text-black-50"><%= "最終更新#{comment.updated_at.strftime("%Y-%m-%d %H:%M")}"%></p>
@@ -79,7 +82,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="text-center border-bottom my-2 text-danger">
-                <p class="mb-1">コメント：<%= comment.comment %>を削除します。</p>
+                <p class="mb-1">コメントを削除します。</p>
                 <p class="mb-1">本当によろしいですか。</p>
               </div>
               <div class="d-flex justify-content-center mb-2">
@@ -104,7 +107,7 @@
     <div class="modal-content">
       <div class="text-center">
         <div class="border-bottom my-2 pb-1">
-          <%= @task.name %>を変更します。
+          現在のタスクを編集します。
         </div>
         <%= form_with model: @task, url:project_task_path(@project.id,@task.id), local: true do |f| %>
           <%= f.text_field :name, class: "outline w-75 my-1", placeholder:"タスクネーム"%>
@@ -124,7 +127,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="text-center border-bottom my-2 text-danger">
-        <p class="mb-1">タスク：<%= @task.name %>を削除します。</p>
+        <p class="mb-1">現在のタスクを削除します。</p>
         <p class="mb-1">本当によろしいですか。</p>
       </div>
       <div class="d-flex justify-content-center mb-2">
@@ -145,6 +148,7 @@
         </div>
         <%= form_with model: @comment, url:project_task_comments_path(@project.id,@task.id), local: true do |f| %>
           <%= f.text_area :comment, class: "outline w-75 my-1", placeholder:"進捗状況などを記入してください。"%>
+          <%= f.file_field :img, id: :book_img %>
           <div class="d-flex justify-content-center my-2">
             <%= f.submit "コメント追加" %>
             <div class="btn-sm btn-secondary ml-4 cursor-pointer" data-dismiss="modal">
