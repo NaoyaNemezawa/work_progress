@@ -4,8 +4,11 @@ RSpec.describe CommentsController, type: :request do
   before do
     @user = FactoryBot.create(:user)
     @project = FactoryBot.create(:project)
-    @task = FactoryBot.create(:task)
-    @comment = FactoryBot.create(:comment)
+    UserProject.create(user_id:@user.id, project_id:@project.id)
+    Task.create(name: "テスト用タスク", specifics: nil, project_id:@project.id)
+    @task = Task.find_by(project_id:@project.id)
+    Comment.create(comment: "テスト用コメント", task_id: @task.id, user_id: @user.id)
+    @comment = Comment.find_by(user_id: @user.id)
     sign_in @user
   end
 
@@ -17,11 +20,8 @@ RSpec.describe CommentsController, type: :request do
       end
   
       it "indexアクションにリクエストするとレスポンスにコメントが含まれる" do
-        @comment2 = Comment.create(comment: "テスト", task_id: @task.id, user_id: @user.id)
-        # 処理の順番が１，ユーザー登録と同時にプロジェクト作成。２，プロジェクト作成。３，タスクなど作成のためかうまくパスしない
-        # 対応策が見つかるまでは@comment2として作成。
         get project_task_comments_path(@project.id,@task.id)
-        expect(response.body).to include @comment2.comment
+        expect(response.body).to include @comment.comment
       end
     end
   

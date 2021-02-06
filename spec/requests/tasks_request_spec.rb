@@ -5,7 +5,9 @@ RSpec.describe TasksController, type: :request do
   before do
     @user = FactoryBot.create(:user)
     @project = FactoryBot.create(:project)
-    @task = FactoryBot.create(:task)
+    UserProject.create(user_id:@user.id, project_id:@project.id)
+    Task.create(name: "テスト用タスク", specifics: nil, project_id:@project.id)
+    @task = Task.find_by(project_id:@project.id)
     sign_in @user
   end
 
@@ -17,10 +19,8 @@ RSpec.describe TasksController, type: :request do
       end
 
       it "indexアクションにリクエストするとレスポンスにタスク名が含まれる" do
-        @task2 = Task.create(name: "テスト",specifics: nil, project_id: @project.id)
-        # 何故かテスト通らないので@task2として作成。余裕あれば原因調査
         get project_tasks_path(@project.id)
-        expect(response.body).to include @task2.name
+        expect(response.body).to include @task.name
       end
     end
 

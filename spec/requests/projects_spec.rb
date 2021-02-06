@@ -4,6 +4,7 @@ RSpec.describe ProjectsController, type: :request do
   before do
     @user = FactoryBot.create(:user)
     @project = FactoryBot.create(:project)
+    UserProject.create(user_id:@user.id, project_id:@project.id)
     sign_in @user
   end
   describe "GET #index" do
