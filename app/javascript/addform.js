@@ -1,7 +1,7 @@
 document.addEventListener("turbolinks:load", function(){
   let count_form = 0
   const addbtn = document.getElementById("add_btn");
-  const closebtn = document.getElementById("close_btn")
+  const closebtn = document.getElementById("close_btn");
   
   addbtn.addEventListener("click",() => {
     const form = document.getElementById(`form[${count_form}]`);

@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("../addform")
+require("../imagepreview")
 import 'bootstrap'
 import '../src/application.scss'
 

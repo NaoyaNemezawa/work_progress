@@ -150,7 +150,8 @@
         </div>
         <%= form_with model: @comment, url:project_task_comments_path(@project.id,@task.id), local: true do |f| %>
           <%= f.text_area :comment, class: "outline w-75 my-1", placeholder:"進捗状況などを記入してください。"%>
-          <%= f.file_field :img, id: :book_img %>
+          <div id="image_id0"></div><%# 画像プレビュー用です。 %>
+          <%= f.file_field :img, id: :comment_img %>
           <div class="d-flex justify-content-center my-2">
             <%= f.submit "コメント追加" %>
             <div class="btn-sm btn-secondary ml-4 cursor-pointer" data-dismiss="modal">
