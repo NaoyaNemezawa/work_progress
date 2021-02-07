@@ -46,11 +46,11 @@
               </div>
             <% end %>
           </div>
-          <div class="overflow-auto mx-2">
+          <div class="mx-2">
             <%= comment.comment %>
-            
-            <%= image_tag comment.img.to_s  %>
-            
+            <% if comment.img.to_s.present? %>
+              <div><%= image_tag comment.img.to_s %></div>
+            <% end %>
           </div>
           <div>
             <p class="mb-1 f-size12 text-right text-black-50"><%= "最終更新#{comment.updated_at.strftime("%Y-%m-%d %H:%M")}"%></p>
