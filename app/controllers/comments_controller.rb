@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:comment, :img).merge(user_id: current_user.id, task_id: params[:task_id])
+    params.require(:comment).permit(:comment, :img, :remove_img).merge(user_id: current_user.id, task_id: params[:task_id])
   end
 
   def find_data

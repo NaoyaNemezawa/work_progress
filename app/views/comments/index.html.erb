@@ -62,10 +62,12 @@
             <div class="modal-content">
               <div class="text-center">
                 <div class="border-bottom my-2 pb-1">
-                  <%= comment.comment %>を変更します。
+                  コメントの内容を変更します。
                 </div>
                 <%= form_with model: @comment, url:project_task_comment_path(@project.id,@task.id,comment.id),method: :patch, local: true do |f| %>
                   <%= f.text_area :comment, class: "outline w-75 my-1",value: comment.comment, placeholder:"コメント内容"%>
+                  <%= f.file_field :img, id: :book_img %><br>
+                  <%= f.check_box :remove_img %>画像を削除する
                   <div class="d-flex justify-content-center my-2">
                     <%= f.submit "編集する" %>
                     <div class="btn-sm btn-secondary ml-4 cursor-pointer" data-dismiss="modal">
