@@ -66,8 +66,10 @@
                 </div>
                 <%= form_with model: @comment, url:project_task_comment_path(@project.id,@task.id,comment.id),method: :patch, local: true do |f| %>
                   <%= f.text_area :comment, class: "outline w-75 my-1",value: comment.comment, placeholder:"コメント内容"%>
-                  <%= image_tag comment.img.to_s %>
-                  <%= f.file_field :img, id: :book_img %><br>
+                  <div id="previw<%= comment.id%>">
+                    <%= image_tag comment.img.to_s %>
+                  </div>
+                  <%= f.file_field :img, class: :edit_img %><br>
                   <%= f.check_box :remove_img %>画像を削除する
                   <div class="d-flex justify-content-center my-2">
                     <%= f.submit "編集する" %>

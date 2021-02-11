@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("../addform")
 require("../imagepreview")
+require("../changepreviw")
 import 'bootstrap'
 import '../src/application.scss'
 
