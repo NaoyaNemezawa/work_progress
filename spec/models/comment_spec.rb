@@ -7,7 +7,16 @@ RSpec.describe Comment, type: :model do
 
   describe "コメント投稿機能" do
     context "コメント投稿できるとき" do
+      it "コメントと画像があれば投稿できる" do
+        expect(@comment).to be_valid
+      end
       it "commmentがあれば投稿できる" do
+        @comment.img = nil
+        expect(@comment).to be_valid
+      end
+      
+      it "画像があれば投稿できる" do
+        @comment.comment = nil
         expect(@comment).to be_valid
       end
     end
@@ -15,6 +24,7 @@ RSpec.describe Comment, type: :model do
     context "コメント投稿できないとき" do
       it "commentが空だと投稿できない" do
         @comment.comment = ""
+        @comment.img = nil
         @comment.valid?
         expect(@comment.errors.full_messages).to include("Comment can't be blank")
       end
