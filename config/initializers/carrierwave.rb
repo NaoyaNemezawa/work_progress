@@ -1,5 +1,9 @@
-unless Rails.env.development? || Rails.env.test?
-  CarrierWave.configure do |config|
+require 'carrierwave/storage/abstract'
+require 'carrierwave/storage/file'
+require 'carrierwave/storage/fog'
+
+CarrierWave.configure do |config|
+  if Rails.env.production?
     config.fog_credentials = {
       provider: "AWS",
       aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"] ,
@@ -8,5 +12,8 @@ unless Rails.env.development? || Rails.env.test?
     }
     config.fog_directory = "progress226"
     config.cache_storage = :fog
+  else
+    config.storage :file
+    config.enable_processing = false if Rails.env.test?
   end
 end
