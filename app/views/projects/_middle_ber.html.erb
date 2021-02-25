@@ -1,5 +1,5 @@
 <div class="col-3 p-0 bg-darkgray text-white">
-  <div class="bg-white text-dark border m-2">
+  <div class="bg-white text-dark m-2">
     <div class="d-flex justify-content-between">
       <div class="ml-1 w-75"><%= project.name %></div>
       <%# 編集ボタン %>
@@ -37,10 +37,12 @@
     </div>
   </div>
   <%# タスク一覧表示 %>
-  <div class="overflow-auto">
+  <div class="overflow-auto vh-100-135px">
     <% tasks.each do |task| %>
       <div class="d-flex justify-content-between py-1 m-2">
+      
         <%= link_to task.name, project_task_comments_path(project.id,task.id), class: "text-reset py-2 my-auto mx-1" %>
+        
       </div>
     <% end %>
   </div>

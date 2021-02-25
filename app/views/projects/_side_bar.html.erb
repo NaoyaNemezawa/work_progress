@@ -7,7 +7,7 @@
     </div>
   </div>
   <%# プロジェクト一覧 %>
-  <div class="overflow-auto vh100-80px">
+  <div class="overflow-auto vh100-80px"><%# 参考 %>
   <% current_user.projects.each do |project| %>
     <div class="d-flex justify-content-between py-2">
       <%= link_to project.name, project_tasks_path(project.id), class: "text-reset align-text-center py-1 my-auto mx-1 f-size1vw" %>
