@@ -25,7 +25,7 @@
       </div>
         <%= form_with model: @newproject, class:"text-center", local: true do |f| %>
           <%= f.text_field :name, class:"outline w-75 my-1", placeholder: "プロジェクト名" %><br/>
-          <%= f.datetime_field :test, min: Date.today %><br/>
+          <%= f.datetime_field :deadline, min: Date.today %><br/>
           メンバーのメールアドレス（任意）
           <div class ="form my-1" id = "form[0]">
             <input class="outline w-75" name="project[emails][]" id = "input" placeholder="メンバーのemail">
